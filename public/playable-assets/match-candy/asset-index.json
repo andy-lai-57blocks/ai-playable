@@ -99,7 +99,7 @@
       "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_00.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_00.png"
+      "url": "/playable-assets/match-candy/asset_00.png"
     },
     {
       "file": "asset_01.png",
@@ -121,7 +121,7 @@
       "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_01.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_01.png"
+      "url": "/playable-assets/match-candy/asset_01.png"
     },
     {
       "file": "asset_02.png",
@@ -143,7 +143,7 @@
       "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_02.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_02.png"
+      "url": "/playable-assets/match-candy/asset_02.png"
     },
     {
       "file": "asset_03.png",
@@ -164,7 +164,7 @@
       "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_03.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_03.png"
+      "url": "/playable-assets/match-candy/asset_03.png"
     },
     {
       "file": "asset_04.png",
@@ -186,7 +186,7 @@
       "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_04.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_04.png"
+      "url": "/playable-assets/match-candy/asset_04.png"
     },
     {
       "file": "asset_05.png",
@@ -207,7 +207,7 @@
       "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_05.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_05.png"
+      "url": "/playable-assets/match-candy/asset_05.png"
     },
     {
       "file": "asset_06.png",
@@ -229,7 +229,7 @@
       "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_06.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_06.png"
+      "url": "/playable-assets/match-candy/asset_06.png"
     },
     {
       "file": "asset_07.png",
@@ -249,7 +249,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_07.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_07.png"
+      "url": "/playable-assets/match-candy/asset_07.png"
     },
     {
       "file": "asset_08.png",
@@ -269,7 +269,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_08.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_08.png"
+      "url": "/playable-assets/match-candy/asset_08.png"
     },
     {
       "file": "asset_09.png",
@@ -289,7 +289,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_09.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_09.png"
+      "url": "/playable-assets/match-candy/asset_09.png"
     },
     {
       "file": "asset_10.png",
@@ -313,7 +313,7 @@
       "dimensions": "2048x2048",
       "format": "png",
       "path": "./match-candy/asset_10.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_10.png"
+      "url": "/playable-assets/match-candy/asset_10.png"
     },
     {
       "file": "asset_11.png",
@@ -341,7 +341,7 @@
       "dimensions": "1170x446",
       "format": "png",
       "path": "./match-candy/asset_11.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_11.png"
+      "url": "/playable-assets/match-candy/asset_11.png"
     },
     {
       "file": "asset_12.png",
@@ -363,7 +363,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_12.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_12.png"
+      "url": "/playable-assets/match-candy/asset_12.png"
     },
     {
       "file": "asset_13.png",
@@ -383,7 +383,7 @@
       "dimensions": "1024x1536",
       "format": "png",
       "path": "./match-candy/asset_13.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_13.png"
+      "url": "/playable-assets/match-candy/asset_13.png"
     },
     {
       "file": "asset_14.png",
@@ -404,7 +404,7 @@
       "dimensions": "1536x1024",
       "format": "png",
       "path": "./match-candy/asset_14.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_14.png"
+      "url": "/playable-assets/match-candy/asset_14.png"
     },
     {
       "file": "asset_15.png",
@@ -427,7 +427,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_15.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_15.png"
+      "url": "/playable-assets/match-candy/asset_15.png"
     },
     {
       "file": "asset_16.png",
@@ -450,7 +450,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_16.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_16.png"
+      "url": "/playable-assets/match-candy/asset_16.png"
     },
     {
       "file": "asset_17.png",
@@ -470,7 +470,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_17.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_17.png"
+      "url": "/playable-assets/match-candy/asset_17.png"
     },
     {
       "file": "asset_18.png",
@@ -490,7 +490,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_18.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_18.png"
+      "url": "/playable-assets/match-candy/asset_18.png"
     },
     {
       "file": "asset_19.png",
@@ -510,7 +510,7 @@
       "dimensions": "200x200",
       "format": "png",
       "path": "./match-candy/asset_19.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_19.png"
+      "url": "/playable-assets/match-candy/asset_19.png"
     },
     {
       "file": "asset_20.png",
@@ -539,7 +539,7 @@
       "dimensions": "1686x2262",
       "format": "png",
       "path": "./match-candy/asset_20.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_20.png"
+      "url": "/playable-assets/match-candy/asset_20.png"
     },
     {
       "file": "asset_21.png",
@@ -563,10 +563,10 @@
       "dimensions": "135x200",
       "format": "png",
       "path": "./match-candy/asset_21.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_21.png"
+      "url": "/playable-assets/match-candy/asset_21.png"
     }
   ],
-  "baseUrl": "http://localhost:4000/uploads/playable-assets/match-candy",
+  "baseUrl": "/playable-assets/match-candy",
   "game": "match-candy",
   "gameplaySpec": "gameplay-spec.md",
   "assetPromptSpec": "asset-prompts.md"

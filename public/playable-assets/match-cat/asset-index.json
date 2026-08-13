@@ -43,18 +43,38 @@
     "gameMechanics": {
       "type": "collect-to-bottom",
       "description": "Match gems to push 3 special collectible objects down to the bottom of the board. All 3 objects must reach the bottom to win.",
-      "boardGems": ["asset_00","asset_01","asset_03","asset_27"],
-      "specialObjects": ["asset_22","asset_23","asset_26"],
-      "specialGlowEffects": {"asset_23":"asset_11","asset_26":"asset_12","asset_22":"asset_18"},
+      "boardGems": [
+        "asset_00",
+        "asset_01",
+        "asset_03",
+        "asset_27"
+      ],
+      "specialObjects": [
+        "asset_22",
+        "asset_23",
+        "asset_26"
+      ],
+      "specialGlowEffects": {
+        "asset_23": "asset_11",
+        "asset_26": "asset_12",
+        "asset_22": "asset_18"
+      },
       "winDisplay": "asset_24",
       "loseDisplay": "asset_14",
       "endScreenPanel": "asset_15",
       "character": {
-        "catStates": ["asset_06","asset_09","asset_17"],
+        "catStates": [
+          "asset_06",
+          "asset_09",
+          "asset_17"
+        ],
         "catShelf": "asset_15",
         "note": "Cat stands on the shelf (asset_15, 440×943 tall platform). Both are children of root202, NOT parent-child."
       },
-      "soundIcons": {"mute":"asset_13","unmute":"asset_25"}
+      "soundIcons": {
+        "mute": "asset_13",
+        "unmute": "asset_25"
+      }
     },
     "targetPlatforms": [
       "meta",
@@ -87,8 +107,8 @@
         "match-element",
         "crown-jewel"
       ],
-      "path": "./match/asset_00.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_00.png"
+      "path": "./match-cat/asset_00.png",
+      "url": "/playable-assets/match-cat/asset_00.png"
     },
     {
       "file": "asset_01.png",
@@ -112,8 +132,8 @@
         "match-element",
         "crown-jewel"
       ],
-      "path": "./match/asset_01.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_01.png"
+      "path": "./match-cat/asset_01.png",
+      "url": "/playable-assets/match-cat/asset_01.png"
     },
     {
       "file": "asset_02.png",
@@ -136,8 +156,8 @@
         "board-texture",
         "panel-background"
       ],
-      "path": "./match/asset_02.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_02.png"
+      "path": "./match-cat/asset_02.png",
+      "url": "/playable-assets/match-cat/asset_02.png"
     },
     {
       "file": "asset_03.png",
@@ -159,8 +179,8 @@
         "match-element",
         "game-piece"
       ],
-      "path": "./match/asset_03.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_03.png"
+      "path": "./match-cat/asset_03.png",
+      "url": "/playable-assets/match-cat/asset_03.png"
     },
     {
       "file": "asset_05.png",
@@ -181,8 +201,8 @@
         "button-background",
         "divider"
       ],
-      "path": "./match/asset_05.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_05.png"
+      "path": "./match-cat/asset_05.png",
+      "url": "/playable-assets/match-cat/asset_05.png"
     },
     {
       "file": "asset_06.png",
@@ -205,8 +225,8 @@
         "mascot-display",
         "cat-state"
       ],
-      "path": "./match/asset_06.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_06.png"
+      "path": "./match-cat/asset_06.png",
+      "url": "/playable-assets/match-cat/asset_06.png"
     },
     {
       "file": "asset_07.png",
@@ -226,8 +246,8 @@
         "ui-icon",
         "score-marker"
       ],
-      "path": "./match/asset_07.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_07.png"
+      "path": "./match-cat/asset_07.png",
+      "url": "/playable-assets/match-cat/asset_07.png"
     },
     {
       "file": "asset_08.png",
@@ -251,8 +271,8 @@
         "game-board-backdrop",
         "end-screen-background"
       ],
-      "path": "./match/asset_08.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_08.png"
+      "path": "./match-cat/asset_08.png",
+      "url": "/playable-assets/match-cat/asset_08.png"
     },
     {
       "file": "asset_09.png",
@@ -277,8 +297,8 @@
         "cat-state",
         "win-celebration"
       ],
-      "path": "./match/asset_09.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_09.png"
+      "path": "./match-cat/asset_09.png",
+      "url": "/playable-assets/match-cat/asset_09.png"
     },
     {
       "file": "asset_10.png",
@@ -298,8 +318,8 @@
         "info-card",
         "text-container"
       ],
-      "path": "./match/asset_10.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_10.png"
+      "path": "./match-cat/asset_10.png",
+      "url": "/playable-assets/match-cat/asset_10.png"
     },
     {
       "file": "asset_11.png",
@@ -321,8 +341,8 @@
         "special-object-highlight",
         "overlay"
       ],
-      "path": "./match/asset_11.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_11.png"
+      "path": "./match-cat/asset_11.png",
+      "url": "/playable-assets/match-cat/asset_11.png"
     },
     {
       "file": "asset_12.png",
@@ -344,8 +364,8 @@
         "special-object-highlight",
         "overlay"
       ],
-      "path": "./match/asset_12.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_12.png"
+      "path": "./match-cat/asset_12.png",
+      "url": "/playable-assets/match-cat/asset_12.png"
     },
     {
       "file": "asset_13.png",
@@ -366,8 +386,8 @@
         "mute-button",
         "ui-icon"
       ],
-      "path": "./match/asset_13.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_13.png"
+      "path": "./match-cat/asset_13.png",
+      "url": "/playable-assets/match-cat/asset_13.png"
     },
     {
       "file": "asset_14.png",
@@ -391,8 +411,8 @@
         "end-screen",
         "failure-icon"
       ],
-      "path": "./match/asset_14.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_14.png"
+      "path": "./match-cat/asset_14.png",
+      "url": "/playable-assets/match-cat/asset_14.png"
     },
     {
       "file": "asset_15.png",
@@ -414,8 +434,8 @@
         "cat-platform",
         "character-platform"
       ],
-      "path": "./match/asset_15.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_15.png"
+      "path": "./match-cat/asset_15.png",
+      "url": "/playable-assets/match-cat/asset_15.png"
     },
     {
       "file": "asset_16.png",
@@ -437,8 +457,8 @@
         "collectible",
         "game-object"
       ],
-      "path": "./match/asset_16.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_16.png"
+      "path": "./match-cat/asset_16.png",
+      "url": "/playable-assets/match-cat/asset_16.png"
     },
     {
       "file": "asset_17.png",
@@ -460,8 +480,8 @@
         "mascot",
         "cat-state"
       ],
-      "path": "./match/asset_17.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_17.png"
+      "path": "./match-cat/asset_17.png",
+      "url": "/playable-assets/match-cat/asset_17.png"
     },
     {
       "file": "asset_18.png",
@@ -483,8 +503,8 @@
         "special-object-highlight",
         "overlay"
       ],
-      "path": "./match/asset_18.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_18.png"
+      "path": "./match-cat/asset_18.png",
+      "url": "/playable-assets/match-cat/asset_18.png"
     },
     {
       "file": "asset_19.png",
@@ -506,8 +526,8 @@
         "score-display",
         "header-bar"
       ],
-      "path": "./match/asset_19.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_19.png"
+      "path": "./match-cat/asset_19.png",
+      "url": "/playable-assets/match-cat/asset_19.png"
     },
     {
       "file": "asset_20.png",
@@ -529,8 +549,8 @@
         "avatar",
         "guide-character"
       ],
-      "path": "./match/asset_20.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_20.png"
+      "path": "./match-cat/asset_20.png",
+      "url": "/playable-assets/match-cat/asset_20.png"
     },
     {
       "file": "asset_21.png",
@@ -553,8 +573,8 @@
         "game-board-surface",
         "primary-board-bg"
       ],
-      "path": "./match/asset_21.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_21.png"
+      "path": "./match-cat/asset_21.png",
+      "url": "/playable-assets/match-cat/asset_21.png"
     },
     {
       "file": "asset_22.png",
@@ -576,8 +596,8 @@
         "collect-to-bottom",
         "target-item"
       ],
-      "path": "./match/asset_22.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_22.png"
+      "path": "./match-cat/asset_22.png",
+      "url": "/playable-assets/match-cat/asset_22.png"
     },
     {
       "file": "asset_23.png",
@@ -599,8 +619,8 @@
         "collect-to-bottom",
         "target-item"
       ],
-      "path": "./match/asset_23.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_23.png"
+      "path": "./match-cat/asset_23.png",
+      "url": "/playable-assets/match-cat/asset_23.png"
     },
     {
       "file": "asset_24.png",
@@ -622,8 +642,8 @@
         "end-screen",
         "victory-icon"
       ],
-      "path": "./match/asset_24.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_24.png"
+      "path": "./match-cat/asset_24.png",
+      "url": "/playable-assets/match-cat/asset_24.png"
     },
     {
       "file": "asset_25.png",
@@ -645,8 +665,8 @@
         "unmute-button",
         "ui-icon"
       ],
-      "path": "./match/asset_25.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_25.png"
+      "path": "./match-cat/asset_25.png",
+      "url": "/playable-assets/match-cat/asset_25.png"
     },
     {
       "file": "asset_26.png",
@@ -668,8 +688,8 @@
         "collect-to-bottom",
         "target-item"
       ],
-      "path": "./match/asset_26.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_26.png"
+      "path": "./match-cat/asset_26.png",
+      "url": "/playable-assets/match-cat/asset_26.png"
     },
     {
       "file": "asset_27.png",
@@ -691,8 +711,8 @@
         "match-element",
         "game-piece"
       ],
-      "path": "./match/asset_27.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_27.png"
+      "path": "./match-cat/asset_27.png",
+      "url": "/playable-assets/match-cat/asset_27.png"
     },
     {
       "file": "asset_28.png",
@@ -716,8 +736,8 @@
         "play-button",
         "action-banner"
       ],
-      "path": "./match/asset_28.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_28.png"
+      "path": "./match-cat/asset_28.png",
+      "url": "/playable-assets/match-cat/asset_28.png"
     },
     {
       "file": "asset_29.png",
@@ -737,8 +757,8 @@
         "unlock-indicator",
         "ui-icon"
       ],
-      "path": "./match/asset_29.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_29.png"
+      "path": "./match-cat/asset_29.png",
+      "url": "/playable-assets/match-cat/asset_29.png"
     },
     {
       "file": "asset_30.png",
@@ -760,8 +780,8 @@
         "avatar",
         "guide-character"
       ],
-      "path": "./match/asset_30.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_30.png"
+      "path": "./match-cat/asset_30.png",
+      "url": "/playable-assets/match-cat/asset_30.png"
     },
     {
       "file": "asset_31.png",
@@ -783,8 +803,8 @@
         "game-name-display",
         "branding"
       ],
-      "path": "./match/asset_31.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_31.png"
+      "path": "./match-cat/asset_31.png",
+      "url": "/playable-assets/match-cat/asset_31.png"
     },
     {
       "file": "asset_32.png",
@@ -804,8 +824,8 @@
         "play-button",
         "small-cta"
       ],
-      "path": "./match/asset_32.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_32.png"
+      "path": "./match-cat/asset_32.png",
+      "url": "/playable-assets/match-cat/asset_32.png"
     },
     {
       "file": "asset_33.png",
@@ -828,8 +848,8 @@
         "score-multiplier",
         "reward-icon"
       ],
-      "path": "./match/asset_33.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_33.png"
+      "path": "./match-cat/asset_33.png",
+      "url": "/playable-assets/match-cat/asset_33.png"
     },
     {
       "file": "asset_34.png",
@@ -852,11 +872,11 @@
         "reward-icon",
         "score-indicator"
       ],
-      "path": "./match/asset_34.png",
-      "url": "http://localhost:4000/uploads/playable-assets/match/asset_34.png"
+      "path": "./match-cat/asset_34.png",
+      "url": "/playable-assets/match-cat/asset_34.png"
     }
   ],
-  "baseUrl": "http://localhost:4000/uploads/playable-assets/match",
+  "baseUrl": "/playable-assets/match-cat",
   "game": "match-cat",
   "gameplaySpec": "gameplay-spec.md"
 }

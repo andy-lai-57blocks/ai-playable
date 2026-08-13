@@ -138,7 +138,7 @@
       "size": 25448,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_00.png"
+      "url": "/playable-assets/match-majiang/asset_00.png"
     },
     {
       "file": "asset_01.png",
@@ -161,7 +161,7 @@
       "size": 28200,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_01.png"
+      "url": "/playable-assets/match-majiang/asset_01.png"
     },
     {
       "file": "asset_02.png",
@@ -184,7 +184,7 @@
       "size": 33603,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_02.png"
+      "url": "/playable-assets/match-majiang/asset_02.png"
     },
     {
       "file": "asset_03.png",
@@ -208,7 +208,7 @@
       "size": 24326,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_03.png"
+      "url": "/playable-assets/match-majiang/asset_03.png"
     },
     {
       "file": "asset_04.png",
@@ -232,7 +232,7 @@
       "size": 31755,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_04.png"
+      "url": "/playable-assets/match-majiang/asset_04.png"
     },
     {
       "file": "asset_05.png",
@@ -256,7 +256,7 @@
       "size": 26942,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_05.png"
+      "url": "/playable-assets/match-majiang/asset_05.png"
     },
     {
       "file": "asset_06.png",
@@ -279,7 +279,7 @@
       "size": 31211,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_06.png"
+      "url": "/playable-assets/match-majiang/asset_06.png"
     },
     {
       "file": "asset_07.png",
@@ -302,7 +302,7 @@
       "size": 26991,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_07.png"
+      "url": "/playable-assets/match-majiang/asset_07.png"
     },
     {
       "file": "asset_08.png",
@@ -326,7 +326,7 @@
       "size": 26275,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_08.png"
+      "url": "/playable-assets/match-majiang/asset_08.png"
     },
     {
       "file": "asset_09.png",
@@ -349,7 +349,7 @@
       "size": 32721,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_09.png"
+      "url": "/playable-assets/match-majiang/asset_09.png"
     },
     {
       "file": "asset_10.png",
@@ -372,7 +372,7 @@
       "size": 28963,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_10.png"
+      "url": "/playable-assets/match-majiang/asset_10.png"
     },
     {
       "file": "asset_11.png",
@@ -395,7 +395,7 @@
       "size": 19777,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_11.png"
+      "url": "/playable-assets/match-majiang/asset_11.png"
     },
     {
       "file": "asset_12.png",
@@ -418,7 +418,7 @@
       "size": 43438,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_12.png"
+      "url": "/playable-assets/match-majiang/asset_12.png"
     },
     {
       "file": "asset_13.png",
@@ -443,7 +443,7 @@
       "size": 18989,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_13.png"
+      "url": "/playable-assets/match-majiang/asset_13.png"
     },
     {
       "file": "asset_14.png",
@@ -468,7 +468,7 @@
       "size": 22458,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_14.png"
+      "url": "/playable-assets/match-majiang/asset_14.png"
     },
     {
       "file": "asset_15.png",
@@ -492,7 +492,7 @@
       "size": 30857,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_15.png"
+      "url": "/playable-assets/match-majiang/asset_15.png"
     },
     {
       "file": "asset_16.png",
@@ -515,7 +515,7 @@
       "size": 21950,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_16.png"
+      "url": "/playable-assets/match-majiang/asset_16.png"
     },
     {
       "file": "asset_17.png",
@@ -537,7 +537,7 @@
       "size": 120097,
       "dimensions": "512x180",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_17.png"
+      "url": "/playable-assets/match-majiang/asset_17.png"
     },
     {
       "file": "asset_18.png",
@@ -562,7 +562,7 @@
       "size": 236951,
       "dimensions": "384x384",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_18.png"
+      "url": "/playable-assets/match-majiang/asset_18.png"
     },
     {
       "file": "asset_19.png",
@@ -584,7 +584,7 @@
       "size": 19753,
       "dimensions": "128x128",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_19.png"
+      "url": "/playable-assets/match-majiang/asset_19.png"
     },
     {
       "file": "asset_20.png",
@@ -606,7 +606,7 @@
       "size": 18150,
       "dimensions": "128x128",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_20.png"
+      "url": "/playable-assets/match-majiang/asset_20.png"
     },
     {
       "file": "asset_21.png",
@@ -631,7 +631,7 @@
       "size": 124480,
       "dimensions": "304x416",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_21.png"
+      "url": "/playable-assets/match-majiang/asset_21.png"
     },
     {
       "file": "asset_22.png",
@@ -659,7 +659,7 @@
       "size": 3389120,
       "dimensions": "1166x1800",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_22.png"
+      "url": "/playable-assets/match-majiang/asset_22.png"
     },
     {
       "file": "asset_23.png",
@@ -680,7 +680,7 @@
       "size": 151324,
       "dimensions": "420x360",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_23.png"
+      "url": "/playable-assets/match-majiang/asset_23.png"
     },
     {
       "file": "asset_24.png",
@@ -701,7 +701,7 @@
       "size": 134906,
       "dimensions": "440x280",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_24.png"
+      "url": "/playable-assets/match-majiang/asset_24.png"
     },
     {
       "file": "asset_25.png",
@@ -724,7 +724,7 @@
       "size": 34839,
       "dimensions": "231x129",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_25.png"
+      "url": "/playable-assets/match-majiang/asset_25.png"
     },
     {
       "file": "asset_26.png",
@@ -747,7 +747,7 @@
       "size": 32512,
       "dimensions": "204x135",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_26.png"
+      "url": "/playable-assets/match-majiang/asset_26.png"
     },
     {
       "file": "asset_27.png",
@@ -772,7 +772,7 @@
       "size": 195624,
       "dimensions": "384x384",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_27.png"
+      "url": "/playable-assets/match-majiang/asset_27.png"
     },
     {
       "file": "asset_28.png",
@@ -792,7 +792,7 @@
       "size": 544,
       "dimensions": "160x192",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_28.png"
+      "url": "/playable-assets/match-majiang/asset_28.png"
     },
     {
       "file": "asset_29.png",
@@ -813,7 +813,7 @@
       "size": 848,
       "dimensions": "184x216",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_29.png"
+      "url": "/playable-assets/match-majiang/asset_29.png"
     },
     {
       "file": "asset_30.png",
@@ -833,7 +833,7 @@
       "size": 3226,
       "dimensions": "512x720",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_30.png"
+      "url": "/playable-assets/match-majiang/asset_30.png"
     },
     {
       "file": "asset_31.png",
@@ -853,7 +853,7 @@
       "size": 597509,
       "dimensions": "576x1024",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_31.png"
+      "url": "/playable-assets/match-majiang/asset_31.png"
     },
     {
       "file": "asset_32.png",
@@ -878,7 +878,7 @@
       "size": 3072462,
       "dimensions": "2048x2048",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_32.png"
+      "url": "/playable-assets/match-majiang/asset_32.png"
     },
     {
       "file": "asset_33.png",
@@ -904,7 +904,7 @@
       "size": 28905,
       "dimensions": "200x200",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_33.png"
+      "url": "/playable-assets/match-majiang/asset_33.png"
     },
     {
       "file": "asset_34.png",
@@ -930,7 +930,7 @@
       "size": 42728,
       "dimensions": "200x200",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_34.png"
+      "url": "/playable-assets/match-majiang/asset_34.png"
     },
     {
       "file": "asset_35.png",
@@ -956,7 +956,7 @@
       "size": 27043,
       "dimensions": "200x200",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_35.png"
+      "url": "/playable-assets/match-majiang/asset_35.png"
     },
     {
       "file": "asset_36.png",
@@ -982,10 +982,10 @@
       "size": 748891,
       "dimensions": "1170x470",
       "format": "png",
-      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_36.png"
+      "url": "/playable-assets/match-majiang/asset_36.png"
     }
   ],
-  "baseUrl": "http://localhost:4000/uploads/playable-assets/match-majiang",
+  "baseUrl": "/playable-assets/match-majiang",
   "game": "match-majiang",
   "gameplaySpec": "gameplay-spec.md"
 }

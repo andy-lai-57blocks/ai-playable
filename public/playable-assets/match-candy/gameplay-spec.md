@@ -1,18 +1,18 @@
-# Match Game — Candy Theme Gameplay Specification
+# Match Candy — Gameplay Specification
 
 > Semantic gameplay reference. Resolve assets by matching **category + tags** against `asset-index.json`. No filenames are hardcoded.
 >
-> Original candy match-3 theme for playable ads. Not affiliated with any commercial candy puzzle brand.
+> This spec mirrors the actual `phaser-match` engine: **collect-to-bottom** mode.
 
 ---
 
 ## 1. Overview
 
-A **glossy candy match-3** playable ad. The player swaps sugary pieces on a bright blue board, triggers special candies, and clears chocolate objectives before moves run out.
+A **glossy candy match-3** playable ad. The player swaps candies on a jelly-blue 6×8 board. Three special collectibles (lemon drop, heart candy, chocolate bar) start near the top of the board; as the player clears candies beneath them, they fall one row at a time. When each reaches the bottom row it is collected onto the pink frosting collection box. A cute candy bear mascot cheers beside the board.
 
-- **Genre**: Match-3 casual puzzle
-- **Duration**: ~30 seconds per round
-- **Objective**: Reach target score and/or collect chocolate goals within limited moves
+- **Genre**: Match-3 / collect-to-bottom puzzle
+- **Duration**: 3-minute round (180s timer)
+- **Objective**: Drop and collect all **3** special objects to win; timeout = lose
 
 ---
 
@@ -20,21 +20,20 @@ A **glossy candy match-3** playable ad. The player swaps sugary pieces on a brig
 
 ```
 ┌──────────────────────────────┐
-│ [bear candy collection box]  │
-│ score | moves | objectives   │
-├──────────────────────────────┤
-│ [sky-blue board background]  │
+│ 🍋 ♥ 🍫  (mini HUD slots)   │
 │                              │
-│   ○ ▬ ▢ ● ▬                 │
-│   ▢ ● ○ ▢ ●                 │
-│   ● ▬ ▢ ○ ▬                 │
-│   ○ ● ▬ ▢ ●                 │
+│  [jelly-blue board 6×8]   🐻 │
+│   ○ ▬ ● ▢ ● ○ ▬             │
+│   🍋 ♥ 🍫  (specials)       │
+│   ● ○ ▬ ● ○ ▢               │
+│   ...                        │
 │                              │
+│   [pink frosting box 3 wells]│
 │        [CTA button]          │
 └──────────────────────────────┘
 ```
 
-Suggested board size for playable: **6×8** (portrait) or **6×6** (compact).
+Board: **6×8 portrait**. Collection box (stool) at the bottom; bear mascot beside the board.
 
 ---
 
@@ -44,110 +43,99 @@ Suggested board size for playable: **6×8** (portrait) or **6×6** (compact).
 
 | Aspect | Detail |
 |--------|--------|
-| **Input** | Tap/swap adjacent candies |
-| **Scoring** | Match 3+ in a row/column |
-| **Special creation** | Match 4 → striped; Match 5 / L/T → wrapped; Match 5+ line → color bomb |
-| **Win** | Score ≥ target AND objectives complete (or either, per difficulty) |
-| **Lose** | Moves exhausted with goals incomplete |
+| **Input** | Tap two adjacent candies to swap, or tap and drag/swipe one cell |
+| **Match** | 3+ identical candies in a row/column clear with a particle burst |
+| **Fall & refill** | Candies above fall down; new candies refill from the top; chains resolve automatically |
+| **Invalid swap** | Swaps that create no match revert automatically |
+| **Special objects** | Cannot be swapped and never match; they fall one row whenever the cell below empties |
+| **Win** | All 3 specials reach the bottom row and land on the collection box |
+| **Lose** | 180-second timer runs out before all 3 are collected |
 
 ### 3.2 Board Tokens
 
-Resolve from `category: gem`:
+Resolve from `category: gem` + `board-token` (5 types, mapped in `gameMechanics.boardGems`):
 
-| Candy | Tags |
-|-------|------|
+| Candy | Tags to match |
+|-------|---------------|
 | Blue striped sphere | `blue`, `striped`, `sphere` |
 | Green striped bar | `green`, `striped`, `vertical` |
-| Yellow lemon-drop | `yellow`, `teardrop` |
-| Cyan soft hexagon | `cyan`, `hexagon` |
+| Cyan hexagon pillow | `cyan`, `hexagon` |
 | Chocolate sprinkle sphere | `chocolate`, `sprinkles`, `sphere` |
-| Purple heart | `purple`, `heart` |
-| Red wrapped candy | `red`, `wrapped` |
+| Red wrapped square | `red`, `wrapped`, `square` |
 
-### 3.3 Special Candies
+### 3.3 Special Objects (Collectibles)
 
-Resolve from `category: special`:
+Resolve from `category: special` + `collect-to-bottom` (mapped in `gameMechanics.specialObjects`):
 
-| Special | Tags | Effect |
-|---------|------|--------|
-| Color bomb | `color-bomb`, `sprinkles` | Clears all candies of one chosen color |
-| Striped power-up | `striped`, `power-up` | Clears entire row or column |
-| Wrapped power-up | `wrapped`, `power-up` | Clears a local blast area |
+| Object | Tags to match |
+|--------|---------------|
+| Lemon drop (yellow teardrop) | `lemon`, `yellow`, `teardrop` |
+| Heart candy (purple) | `heart`, `purple` |
+| Chocolate bar (objective icon) | `chocolate`, `bar`, `objective` |
 
-Each special should optionally use mapped glow overlays from `globalTags.gameMechanics.specialGlowEffects`.
+- Spawn near the top of the board (rows 0–1, distinct columns).
+- Each lands in its own well on the pink frosting **collection box** (`category: ui` + `collection-box`, `collect-stool`; `gameMechanics.collectionShelf`).
+- Mini HUD icons top-left show collection progress (dim → lit).
 
-### 3.4 Objectives
+### 3.4 Layout Tunables (from `gameMechanics`)
 
-- Primary collectible: `category: collectible`, tags `chocolate`, `objective`
-- HUD shows progress like `collected / target` (e.g. `2/10`)
+| Key | Value | Meaning |
+|-----|-------|---------|
+| `stoolLift` | 36 | Lifts the collection box above the bottom edge |
+| `stoolLandOffset` | 0 | Vertical offset when a special lands |
+| `charYOffset` | 50 | Vertical offset for the bear mascot |
+| `boardYOffset` | 20 | Board vertical offset |
+
+### 3.5 Difficulty
+
+| Difficulty | Board | Target score | Timer |
+|------------|-------|--------------|-------|
+| Easy | 6×8 | 300 | 180s |
+| Normal | 6×8 | 400 | 180s |
+| Hard | 6×8 | 500 | 180s |
+
+Collect mode always ends at 3/3 collected (win) or timeout (lose).
 
 ---
 
-## 4. Visual Mapping Rules
+## 4. Visual Design
+
+### 4.1 Scene Assets
 
 | Role | Category | Tags to match |
 |------|----------|---------------|
 | Main background | `background` | `main-background`, `candy-world`, `primary-bg` |
-| Board surface | `background` | `board-background`, `primary-board-bg`, `panel` |
-| Collection box | `ui` | `collection-box`, `pink`, `frosting`, `cream` |
-| Moves badge | `ui` | `moves`, `counter`, `circle` |
-| Objective icon | `collectible` | `chocolate`, `objective` |
+| Board surface | `background` | `board-background`, `primary-board-bg`, `grid-6x8` |
+| Bear mascot | `character` | `bear`, `mascot`, `protagonist` |
+| Collection box (stool) | `ui` | `collection-box`, `collect-stool`, `pink`, `frosting` |
+| Special objects | `special` | `collect-to-bottom` |
+| Win badge | `ui` | `win`, `victory`, `star` |
+| Lose badge | `ui` | `lose`, `failure`, `broken-candy` |
 | End panel | `ui` | `panel`, `end-screen` |
-| CTA | `ui` | `cta`, `button`, `wide` |
-| Win badge | `ui` | `win`, `star` |
-| Lose badge | `ui` | `lose`, `broken-candy` |
-| Sound mute/unmute | `ui` | `sound`, `mute` / `unmute` |
+| CTA button | `ui` | `cta`, `button`, `wide` |
+| Mute / unmute | `ui` | `mute` / `unmute` |
 
-### Color Palette
+### 4.2 Art Direction
 
-```
-Board BG:   sky blue (#3B6FB8 → #2F5FA8)
-HUD:        mint teal (#44D4B5)
-Accent CTA: candy pink (#FF5FA2)
-Text:       white (#FFFFFF)
-```
+- 3D-glossy, candy-coated casual style
+- Bright pastel palette: candy-blue, candy-green, candy-red, mint-teal, chocolate-brown, sky-blue
+- Soft rounded shapes, glossy highlights, sprinkles
 
 ---
 
-## 5. Difficulty Presets
+## 5. Playable Flow
 
-| Difficulty | Board | Candy types | Moves | Score target | Chocolate goal |
-|------------|-------|-------------|-------|--------------|----------------|
-| Easy | 6×6 | 4 | 25 | 150 | 5 |
-| Normal | 6×8 | 4 | 20 | 300 | 10 |
-| Hard | 6×8 | 4 + specials | 15 | 450 | 12 |
-
-Default for playable ads: **Normal**.
-
----
-
-## 6. End Screen Logic
-
-### Win
-- Show `win` star badge + end panel + CTA
-- Copy: **"Sweet Victory! Play Now"**
-
-### Lose
-- Show `lose` broken-candy badge + retry + CTA
-- Copy: **"Almost There! Try Again"**
+1. Show candy-world backdrop, jelly-blue board, bear mascot, empty collection box (3 wells)
+2. Board fills with 5 candy types; 3 specials appear near the top
+3. Player swaps candies; matches burst with particles; specials drop as cells below clear
+4. Each special reaching the bottom row tweens into a collection-box well (mini HUD icons light up)
+5. All 3 collected → "Sweet!" win badge + CTA; timer out → "Failed!" lose badge + CTA
+6. CTA posts `parent.postMessage("download", "*")`
 
 ---
 
-## 7. CTA Contract
+## 6. Asset Resolution Rules
 
-- **Asset**: `category: ui`, tags `cta`, `button`, `wide`
-- **Action**: `parent.postMessage("download", "*")`
-- **Copy candidates**: "Play Now" / "Install" / "Crush More Levels"
-
----
-
-## 8. AI Generation Guide
-
-1. Load `asset-index.json`.
-2. Resolve HUD + board roles via tags (§4).
-3. Place board tokens from `category: gem`.
-4. Inject specials from `category: special` for Hard / late-game moments.
-5. Implement swap → match → clear → gravity → cascade.
-6. Track score, moves, and chocolate objective progress.
-7. Render win/lose panel with CTA.
-8. Output a single self-contained HTML playable.
+1. Prefer `globalTags.gameMechanics` mappings when present
+2. Otherwise resolve by `category` + `tags` + `usage`
+3. Never hardcode filenames in gameplay code — always go through the index

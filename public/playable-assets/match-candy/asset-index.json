@@ -220,12 +220,12 @@
         "candy",
         "common"
       ],
-      "description": "Red wrapped square candy — match-3 board gem. Edge-hardened and resized to 256px for cleaner playable downscale.",
+      "description": "Red wrapped square candy with circular peppermint swirl — match-3 board gem. Symmetrical silhouette, aspect-preserving 80×80.",
       "usage": [
         "board-token",
         "match-element"
       ],
-      "size": 11904,
+      "size": 10726,
       "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_06.png",
@@ -359,8 +359,8 @@
         "objective-icon",
         "collectible"
       ],
-      "size": 19719,
-      "dimensions": "200x200",
+      "size": 13508,
+      "dimensions": "80x80",
       "format": "png",
       "path": "./match-candy/asset_12.png",
       "url": "/playable-assets/match-candy/asset_12.png"

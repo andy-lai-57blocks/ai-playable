@@ -2,11 +2,18 @@ import { assemblePlayable } from "@/lib/playable-shell";
 import { getEngineIds } from "@/lib/engines";
 import type { PlayableDesignSpec } from "@/lib/engines/engine.interface";
 import { llmChat } from "@/lib/llm";
+import { readFile } from "fs/promises";
+import { join } from "path";
+
+/** Read a file from the app's public folder (works locally and on Vercel). */
+export async function readPublicFile(relativePath: string): Promise<string> {
+  const clean = relativePath.replace(/^\/+/, "");
+  return readFile(join(process.cwd(), "public", clean), "utf-8");
+}
 
 export async function resolveAssets(assetIndexUrl: string, baseUrl: string) {
-  const url = baseUrl + assetIndexUrl;
-  const res = await fetch(url);
-  const index = await res.json();
+  const raw = await readPublicFile(assetIndexUrl);
+  const index = JSON.parse(raw);
   const assets = index.assets || [];
   const game = index.game || "match";
   const mechanics = index.globalTags?.gameMechanics || {};

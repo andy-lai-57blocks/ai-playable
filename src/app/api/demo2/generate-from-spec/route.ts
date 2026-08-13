@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { llmChat } from "@/lib/llm";
 import { assemblePlayable } from "@/lib/playable-shell";
 import { getEngineIds } from "@/lib/engines";
-import { resolveAssets, parseSpec } from "@/lib/playable-helper";
+import { resolveAssets, parseSpec, readPublicFile } from "@/lib/playable-helper";
 import { getBaseUrl } from "@/lib/base-url";
 
 export async function POST(req: NextRequest) {
@@ -17,8 +17,7 @@ export async function POST(req: NextRequest) {
       muteIconUrl, unmuteIconUrl, frameUrl, stoolUrl, stoolLift, stoolLandOffset,
       charYOffset, boardYOffset, mechanics, index
     } = await resolveAssets(assetIndexUrl, baseUrl);
-    const specRes = await fetch(baseUrl + gameplaySpecUrl);
-    const gameplaySpec = await specRes.text();
+    const gameplaySpec = await readPublicFile(gameplaySpecUrl);
     const engines = getEngineIds().join(", ");
     const assetSummary = (index.assets || []).slice(0, 12).map((a: any) =>
       `${a.file}: ${a.category} [${(a.tags||[]).slice(0,4).join(",")}]`

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { llmChat } from "@/lib/llm";
-import { resolveAssets } from "@/lib/playable-helper";
+import { resolveAssets, readPublicFile } from "@/lib/playable-helper";
 import { getBaseUrl } from "@/lib/base-url";
 
 export async function POST(req: NextRequest) {
@@ -10,8 +10,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const { gemUrls, mainBgUrl, characterUrl, index } = await resolveAssets(assetIndexUrl, baseUrl);
-    const specRes = await fetch(baseUrl + gameplaySpecUrl);
-    const gameplaySpec = await specRes.text();
+    const gameplaySpec = await readPublicFile(gameplaySpecUrl);
 
     const system = `Generate a complete, self-contained playable ad as a SINGLE HTML file.
 

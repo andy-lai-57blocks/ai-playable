@@ -1,0 +1,862 @@
+{
+  "$schema": "57creative-playable-asset-index",
+  "source": {
+    "url": "https://s3.amazonaws.com/vungle2-cdn-prod/assets/5b61bd1c6f66a03ec705ebfc/11c587b3d820e0b2135bde6580044808/preview/ad.html",
+    "engine": "Cocos Creator 3D",
+    "extractedAt": "2026-08-08",
+    "totalAssets": 34,
+    "format": "png",
+    "note": "Originally 28 WebP + 7 PNG extracted, 1 tiny particle (8x8px) removed, all remaining converted to PNG"
+  },
+  "globalTags": {
+    "theme": [
+      "royal",
+      "treasure",
+      "palace",
+      "medieval",
+      "fantasy",
+      "luxury"
+    ],
+    "colorPalette": [
+      "gold",
+      "purple",
+      "deep-blue",
+      "amber",
+      "warm-brown"
+    ],
+    "mood": [
+      "premium",
+      "magical",
+      "rich",
+      "elegant"
+    ],
+    "artStyle": [
+      "2d-cartoon",
+      "stylized",
+      "casual-game"
+    ],
+    "gameGenre": [
+      "match3",
+      "treasure-collection",
+      "puzzle"
+    ],
+    "gameMechanics": {
+      "type": "collect-to-bottom",
+      "description": "Match gems to push 3 special collectible objects down to the bottom of the board. All 3 objects must reach the bottom to win.",
+      "boardGems": ["asset_00","asset_01","asset_03","asset_27"],
+      "specialObjects": ["asset_22","asset_23","asset_26"],
+      "specialGlowEffects": {"asset_23":"asset_11","asset_26":"asset_12","asset_22":"asset_18"},
+      "winDisplay": "asset_24",
+      "loseDisplay": "asset_14",
+      "endScreenPanel": "asset_15",
+      "character": {
+        "catStates": ["asset_06","asset_09","asset_17"],
+        "catShelf": "asset_15",
+        "note": "Cat stands on the shelf (asset_15, 440×943 tall platform). Both are children of root202, NOT parent-child."
+      },
+      "soundIcons": {"mute":"asset_13","unmute":"asset_25"}
+    },
+    "targetPlatforms": [
+      "meta",
+      "google-ads",
+      "tiktok",
+      "applovin",
+      "liftoff"
+    ]
+  },
+  "assets": [
+    {
+      "file": "asset_00.png",
+      "size": 2716,
+      "dimensions": "79x80",
+      "format": "png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "golden",
+        "crown",
+        "gem",
+        "crown-jewel",
+        "royal",
+        "small",
+        "pink"
+      ],
+      "description": "Golden crown jewel with pink gem center - match-3 elimination element",
+      "usage": [
+        "board-token",
+        "match-element",
+        "crown-jewel"
+      ],
+      "path": "./match/asset_00.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_00.png"
+    },
+    {
+      "file": "asset_01.png",
+      "size": 2646,
+      "dimensions": "77x82",
+      "format": "png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "golden",
+        "crown",
+        "gem",
+        "crown-jewel",
+        "royal",
+        "small",
+        "blue"
+      ],
+      "description": "Golden crown jewel with blue gem center - match-3 elimination element",
+      "usage": [
+        "board-token",
+        "match-element",
+        "crown-jewel"
+      ],
+      "path": "./match/asset_01.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_01.png"
+    },
+    {
+      "file": "asset_02.png",
+      "size": 7738,
+      "dimensions": "2048x2048",
+      "format": "png",
+      "category": "background",
+      "tags": [
+        "golden",
+        "texture",
+        "royal",
+        "damask",
+        "pattern",
+        "full-size",
+        "repeatable"
+      ],
+      "description": "Full-size golden damask/filigree pattern texture on dark background, suitable as tiled background",
+      "usage": [
+        "background-pattern",
+        "board-texture",
+        "panel-background"
+      ],
+      "path": "./match/asset_02.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_02.png"
+    },
+    {
+      "file": "asset_03.png",
+      "size": 2830,
+      "dimensions": "78x78",
+      "format": "png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "golden",
+        "glow",
+        "sparkle",
+        "royal",
+        "small"
+      ],
+      "description": "Golden glowing round gem — match-3 board elimination element",
+      "usage": [
+        "board-token",
+        "match-element",
+        "game-piece"
+      ],
+      "path": "./match/asset_03.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_03.png"
+    },
+    {
+      "file": "asset_05.png",
+      "size": 1874,
+      "dimensions": "114x28",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "button",
+        "bar",
+        "golden",
+        "horizontal",
+        "small"
+      ],
+      "description": "Small horizontal golden bar/button with gradient",
+      "usage": [
+        "progress-bar",
+        "button-background",
+        "divider"
+      ],
+      "path": "./match/asset_05.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_05.png"
+    },
+    {
+      "file": "asset_06.png",
+      "size": 15898,
+      "dimensions": "244x314",
+      "format": "png",
+      "category": "character",
+      "tags": [
+        "cat",
+        "mascot",
+        "treasure-chest",
+        "golden",
+        "closed",
+        "medium",
+        "cat-state-1"
+      ],
+      "description": "Cat mascot in treasure chest (closed state) — cat character state 1",
+      "usage": [
+        "character",
+        "mascot-display",
+        "cat-state"
+      ],
+      "path": "./match/asset_06.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_06.png"
+    },
+    {
+      "file": "asset_07.png",
+      "size": 1439,
+      "dimensions": "31x31",
+      "format": "png",
+      "category": "icon",
+      "tags": [
+        "purple",
+        "gem",
+        "tiny",
+        "crystal"
+      ],
+      "description": "Tiny purple gem/crystal icon",
+      "usage": [
+        "particle",
+        "ui-icon",
+        "score-marker"
+      ],
+      "path": "./match/asset_07.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_07.png"
+    },
+    {
+      "file": "asset_08.png",
+      "size": 313242,
+      "dimensions": "2048x2048",
+      "format": "png",
+      "category": "background",
+      "tags": [
+        "palace",
+        "interior",
+        "golden-arches",
+        "chandelier",
+        "royal",
+        "full-size",
+        "primary-bg"
+      ],
+      "description": "MAIN BACKGROUND: Luxurious palace interior with golden arched doorways, ornate chandeliers, marble floors, and warm amber lighting — the primary scene backdrop",
+      "usage": [
+        "main-background",
+        "scene",
+        "game-board-backdrop",
+        "end-screen-background"
+      ],
+      "path": "./match/asset_08.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_08.png"
+    },
+    {
+      "file": "asset_09.png",
+      "size": 27514,
+      "dimensions": "282x352",
+      "format": "png",
+      "category": "character",
+      "tags": [
+        "cat",
+        "mascot",
+        "treasure-chest",
+        "open",
+        "coins",
+        "gems",
+        "medium",
+        "cat-state-2"
+      ],
+      "description": "Cat mascot with open treasure chest spilling coins and gems — cat character state 2 (win celebration)",
+      "usage": [
+        "character",
+        "mascot-display",
+        "cat-state",
+        "win-celebration"
+      ],
+      "path": "./match/asset_09.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_09.png"
+    },
+    {
+      "file": "asset_10.png",
+      "size": 5820,
+      "dimensions": "224x158",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "panel",
+        "card",
+        "golden-border",
+        "medium"
+      ],
+      "description": "Golden-bordered card/panel with dark center, suitable for text overlay",
+      "usage": [
+        "score-panel",
+        "info-card",
+        "text-container"
+      ],
+      "path": "./match/asset_10.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_10.png"
+    },
+    {
+      "file": "asset_11.png",
+      "size": 1986,
+      "dimensions": "105x81",
+      "format": "png",
+      "category": "effect",
+      "tags": [
+        "glow",
+        "sparkle",
+        "effect",
+        "shine",
+        "small",
+        "glow-for-asset-23"
+      ],
+      "description": "Sparkle/shine glow effect overlay for asset_23 (white diamond special object)",
+      "usage": [
+        "glow-effect",
+        "special-object-highlight",
+        "overlay"
+      ],
+      "path": "./match/asset_11.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_11.png"
+    },
+    {
+      "file": "asset_12.png",
+      "size": 2306,
+      "dimensions": "104x85",
+      "format": "png",
+      "category": "effect",
+      "tags": [
+        "glow",
+        "sparkle",
+        "effect",
+        "shine",
+        "small",
+        "glow-for-asset-26"
+      ],
+      "description": "Sparkle/shine glow effect overlay for asset_26 (yellow citrine special object)",
+      "usage": [
+        "glow-effect",
+        "special-object-highlight",
+        "overlay"
+      ],
+      "path": "./match/asset_12.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_12.png"
+    },
+    {
+      "file": "asset_13.png",
+      "size": 1357,
+      "dimensions": "130x117",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "sound",
+        "mute",
+        "icon",
+        "button",
+        "small"
+      ],
+      "description": "Sound mute icon — click to disable game music/sound effects",
+      "usage": [
+        "sound-toggle",
+        "mute-button",
+        "ui-icon"
+      ],
+      "path": "./match/asset_13.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_13.png"
+    },
+    {
+      "file": "asset_14.png",
+      "size": 41602,
+      "dimensions": "657x657",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "lose",
+        "failure",
+        "ornate",
+        "golden",
+        "circular",
+        "large",
+        "medallion",
+        "end-screen"
+      ],
+      "description": "Lose/failure screen icon — large ornate golden circular medallion displayed in center when game is lost",
+      "usage": [
+        "lose-display",
+        "end-screen",
+        "failure-icon"
+      ],
+      "path": "./match/asset_14.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_14.png"
+    },
+    {
+      "file": "asset_15.png",
+      "size": 71348,
+      "dimensions": "440x943",
+      "format": "png",
+      "category": "platform",
+      "tags": [
+        "cat-shelf",
+        "cat-platform",
+        "vertical",
+        "tall",
+        "large",
+        "platform"
+      ],
+      "description": "CAT SHELF PLATFORM (440×943): Tall vertical platform where the cat mascot (asset_17) stands. In original Cocos game, cat and shelf are sibling nodes under root202 — cat is NOT a child of the shelf. This is the cat's standing platform, not an end-screen panel.",
+      "usage": [
+        "cat-shelf",
+        "cat-platform",
+        "character-platform"
+      ],
+      "path": "./match/asset_15.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_15.png"
+    },
+    {
+      "file": "asset_16.png",
+      "size": 3756,
+      "dimensions": "88x81",
+      "format": "png",
+      "category": "collectible",
+      "tags": [
+        "target",
+        "orange",
+        "topaz",
+        "amber",
+        "crystal",
+        "collectible",
+        "small"
+      ],
+      "description": "Orange/amber topaz crystal collectible — target item shown in collection goal bar",
+      "usage": [
+        "collectible",
+        "game-object"
+      ],
+      "path": "./match/asset_16.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_16.png"
+    },
+    {
+      "file": "asset_17.png",
+      "size": 19258,
+      "dimensions": "243x290",
+      "format": "png",
+      "category": "character",
+      "tags": [
+        "cat",
+        "mascot",
+        "protagonist",
+        "royal",
+        "medium",
+        "cat-state-3"
+      ],
+      "description": "Cat mascot character portrait (royal attire) — cat character state 3, the game's protagonist",
+      "usage": [
+        "character-portrait",
+        "mascot",
+        "cat-state"
+      ],
+      "path": "./match/asset_17.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_17.png"
+    },
+    {
+      "file": "asset_18.png",
+      "size": 2468,
+      "dimensions": "104x88",
+      "format": "png",
+      "category": "effect",
+      "tags": [
+        "glow",
+        "sparkle",
+        "effect",
+        "shine",
+        "small",
+        "glow-for-asset-22"
+      ],
+      "description": "Sparkle/shine glow effect overlay for asset_22 (purple amethyst special object)",
+      "usage": [
+        "glow-effect",
+        "special-object-highlight",
+        "overlay"
+      ],
+      "path": "./match/asset_18.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_18.png"
+    },
+    {
+      "file": "asset_19.png",
+      "size": 4394,
+      "dimensions": "431x132",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "banner",
+        "ribbon",
+        "golden",
+        "horizontal",
+        "wide",
+        "medium"
+      ],
+      "description": "Wide golden ribbon/banner with ornate ends — suitable for title or score display",
+      "usage": [
+        "title-banner",
+        "score-display",
+        "header-bar"
+      ],
+      "path": "./match/asset_19.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_19.png"
+    },
+    {
+      "file": "asset_20.png",
+      "size": 12726,
+      "dimensions": "229x327",
+      "format": "png",
+      "category": "character",
+      "tags": [
+        "character",
+        "girl",
+        "anime",
+        "purple-hair",
+        "royal",
+        "medium"
+      ],
+      "description": "Girl character (anime style) with purple hair in royal attire",
+      "usage": [
+        "character-portrait",
+        "avatar",
+        "guide-character"
+      ],
+      "path": "./match/asset_20.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_20.png"
+    },
+    {
+      "file": "asset_21.png",
+      "size": 21862,
+      "dimensions": "562x754",
+      "format": "png",
+      "category": "background",
+      "tags": [
+        "board-background",
+        "panel",
+        "portrait",
+        "vertical",
+        "golden-frame",
+        "large",
+        "primary-board-bg"
+      ],
+      "description": "BOARD BACKGROUND: Large golden-framed portrait panel — the game board's background surface on which gems are placed",
+      "usage": [
+        "board-background",
+        "game-board-surface",
+        "primary-board-bg"
+      ],
+      "path": "./match/asset_21.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_21.png"
+    },
+    {
+      "file": "asset_22.png",
+      "size": 4370,
+      "dimensions": "104x88",
+      "format": "png",
+      "category": "special",
+      "tags": [
+        "special-object",
+        "collect-to-bottom",
+        "purple",
+        "amethyst",
+        "target",
+        "medium"
+      ],
+      "description": "SPECIAL OBJECT: Purple amethyst — must be moved to board bottom by matching adjacent gems. Has glow effect from asset_18.",
+      "usage": [
+        "special-object",
+        "collect-to-bottom",
+        "target-item"
+      ],
+      "path": "./match/asset_22.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_22.png"
+    },
+    {
+      "file": "asset_23.png",
+      "size": 4042,
+      "dimensions": "105x81",
+      "format": "png",
+      "category": "special",
+      "tags": [
+        "special-object",
+        "collect-to-bottom",
+        "white",
+        "diamond",
+        "target",
+        "medium"
+      ],
+      "description": "SPECIAL OBJECT: White diamond — must be moved to board bottom by matching adjacent gems. Has glow effect from asset_11.",
+      "usage": [
+        "special-object",
+        "collect-to-bottom",
+        "target-item"
+      ],
+      "path": "./match/asset_23.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_23.png"
+    },
+    {
+      "file": "asset_24.png",
+      "size": 58280,
+      "dimensions": "639x661",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "win",
+        "victory",
+        "crown-jewel",
+        "golden",
+        "large",
+        "end-screen"
+      ],
+      "description": "WIN SCREEN ICON: Large golden crown jewel — displayed in center when all 3 special objects reach the bottom (game won)",
+      "usage": [
+        "win-display",
+        "end-screen",
+        "victory-icon"
+      ],
+      "path": "./match/asset_24.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_24.png"
+    },
+    {
+      "file": "asset_25.png",
+      "size": 1577,
+      "dimensions": "130x117",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "sound",
+        "unmute",
+        "music-on",
+        "icon",
+        "button",
+        "small"
+      ],
+      "description": "SOUND TOGGLE BUTTON (130×117): Sound ON / unmute icon. Click to enable game music and sound effects. This is a UI button only — NOT a cat shelf.",
+      "usage": [
+        "sound-toggle",
+        "unmute-button",
+        "ui-icon"
+      ],
+      "path": "./match/asset_25.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_25.png"
+    },
+    {
+      "file": "asset_26.png",
+      "size": 4360,
+      "dimensions": "104x85",
+      "format": "png",
+      "category": "special",
+      "tags": [
+        "special-object",
+        "collect-to-bottom",
+        "yellow",
+        "citrine",
+        "target",
+        "medium"
+      ],
+      "description": "SPECIAL OBJECT: Yellow citrine — must be moved to board bottom by matching adjacent gems. Has glow effect from asset_12.",
+      "usage": [
+        "special-object",
+        "collect-to-bottom",
+        "target-item"
+      ],
+      "path": "./match/asset_26.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_26.png"
+    },
+    {
+      "file": "asset_27.png",
+      "size": 2788,
+      "dimensions": "79x81",
+      "format": "png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "crown",
+        "golden",
+        "royal",
+        "small",
+        "match-element"
+      ],
+      "description": "Golden crown — match-3 board elimination element",
+      "usage": [
+        "board-token",
+        "match-element",
+        "game-piece"
+      ],
+      "path": "./match/asset_27.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_27.png"
+    },
+    {
+      "file": "asset_28.png",
+      "size": 18364,
+      "dimensions": "591x166",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "button",
+        "cta",
+        "banner",
+        "golden",
+        "wide",
+        "large",
+        "collect-stool"
+      ],
+      "description": "COLLECTION STOOL: Wide golden ornate bench/stool — collected special objects (amethyst, diamond, citrine) are placed on this stool as the collection display. Doubles as CTA banner on end screen.",
+      "usage": [
+        "cta-button",
+        "install-button",
+        "play-button",
+        "action-banner"
+      ],
+      "path": "./match/asset_28.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_28.png"
+    },
+    {
+      "file": "asset_29.png",
+      "size": 3198,
+      "dimensions": "85x81",
+      "format": "png",
+      "category": "icon",
+      "tags": [
+        "key",
+        "golden",
+        "royal",
+        "small"
+      ],
+      "description": "Small golden key icon — unlock/treasure symbol",
+      "usage": [
+        "level-complete-icon",
+        "unlock-indicator",
+        "ui-icon"
+      ],
+      "path": "./match/asset_29.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_29.png"
+    },
+    {
+      "file": "asset_30.png",
+      "size": 22550,
+      "dimensions": "234x285",
+      "format": "png",
+      "category": "character",
+      "tags": [
+        "character",
+        "boy",
+        "anime",
+        "blonde-hair",
+        "royal",
+        "medium"
+      ],
+      "description": "Boy character (anime style) with blonde hair in royal attire",
+      "usage": [
+        "character-portrait",
+        "avatar",
+        "guide-character"
+      ],
+      "path": "./match/asset_30.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_30.png"
+    },
+    {
+      "file": "asset_31.png",
+      "size": 2771,
+      "dimensions": "250x105",
+      "format": "png",
+      "category": "ui",
+      "tags": [
+        "logo",
+        "text",
+        "title",
+        "golden",
+        "wide",
+        "small"
+      ],
+      "description": "Golden text/logo banner — game title or branding element",
+      "usage": [
+        "title-logo",
+        "game-name-display",
+        "branding"
+      ],
+      "path": "./match/asset_31.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_31.png"
+    },
+    {
+      "file": "asset_32.png",
+      "size": 3390,
+      "dimensions": "113x64",
+      "format": "png",
+      "category": "button",
+      "tags": [
+        "button",
+        "golden",
+        "small",
+        "rounded"
+      ],
+      "description": "Small rounded golden button — play or action button",
+      "usage": [
+        "action-button",
+        "play-button",
+        "small-cta"
+      ],
+      "path": "./match/asset_32.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_32.png"
+    },
+    {
+      "file": "asset_33.png",
+      "size": 2989,
+      "dimensions": "105x250",
+      "format": "png",
+      "category": "reward",
+      "tags": [
+        "star",
+        "golden",
+        "tall",
+        "reward",
+        "achievement",
+        "medium"
+      ],
+      "description": "Tall golden star — achievement/reward icon, vertical orientation",
+      "usage": [
+        "star-rating",
+        "achievement-badge",
+        "score-multiplier",
+        "reward-icon"
+      ],
+      "path": "./match/asset_33.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_33.png"
+    },
+    {
+      "file": "asset_34.png",
+      "size": 2930,
+      "dimensions": "128x110",
+      "format": "png",
+      "category": "reward",
+      "tags": [
+        "star",
+        "golden",
+        "wide",
+        "reward",
+        "achievement",
+        "small"
+      ],
+      "description": "Wide golden star badge — achievement/reward icon, horizontal orientation",
+      "usage": [
+        "star-rating",
+        "achievement-badge",
+        "reward-icon",
+        "score-indicator"
+      ],
+      "path": "./match/asset_34.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match/asset_34.png"
+    }
+  ],
+  "baseUrl": "http://localhost:4000/uploads/playable-assets/match",
+  "game": "match-cat",
+  "gameplaySpec": "gameplay-spec.md"
+}

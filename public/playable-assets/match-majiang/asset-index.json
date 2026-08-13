@@ -1,0 +1,991 @@
+{
+  "$schema": "57creative-playable-asset-index",
+  "source": {
+    "url": "screenshot-extract://match-majiang",
+    "engine": "Screenshot + Theme Spec Pack",
+    "extractedAt": "2026-08-13",
+    "totalAssets": 37,
+    "format": "png",
+    "note": "Mahjong solitaire theme from pond screenshot. Unique tile faces recreated to match screenshot style (source tiles too small/overlapped for clean crop). Background, lily pads and lotus extracted from source image. asset_21 is the panda-on-lotus mascot (mirrors match-candy); scenic pond primary bg moved to asset_32 Panda collectibles: bamboo shoot / apple / carrot (asset_33–35) + collection box (asset_36); collect all 3 to win."
+  },
+  "globalTags": {
+    "theme": [
+      "mahjong",
+      "pond",
+      "nature",
+      "lotus",
+      "zen",
+      "asian"
+    ],
+    "colorPalette": [
+      "leaf-green",
+      "white",
+      "jade",
+      "pink",
+      "teal",
+      "golden"
+    ],
+    "mood": [
+      "calm",
+      "peaceful",
+      "casual",
+      "serene",
+      "collection"
+    ],
+    "artStyle": [
+      "2d-cartoon",
+      "casual-game",
+      "flat-icon"
+    ],
+    "gameGenre": [
+      "mahjong-solitaire",
+      "pair-match",
+      "puzzle"
+    ],
+    "gameMechanics": {
+      "type": "mahjong-pair-match-collect",
+      "description": "Tap two identical free tiles (not blocked on left and right) to remove them as a matching pair. Collect three special panda foods (bamboo shoot, apple, carrot) into the panda collection box. Collect all 3 to win.",
+      "boardGems": [
+        "asset_00",
+        "asset_01",
+        "asset_02",
+        "asset_03",
+        "asset_04",
+        "asset_05",
+        "asset_06",
+        "asset_07",
+        "asset_08",
+        "asset_09",
+        "asset_10",
+        "asset_11",
+        "asset_12",
+        "asset_13",
+        "asset_14",
+        "asset_15",
+        "asset_16"
+      ],
+      "specialObjects": [
+        "asset_33",
+        "asset_34",
+        "asset_35"
+      ],
+      "specialGlowEffects": {},
+      "winDisplay": "asset_18",
+      "loseDisplay": "asset_27",
+      "endScreenPanel": "asset_30",
+      "lockedOverlay": "asset_28",
+      "selectionHighlight": "asset_29",
+      "decorations": {
+        "lilyPads": [
+          "asset_23",
+          "asset_24"
+        ],
+        "lotus": [
+          "asset_25",
+          "asset_26"
+        ]
+      },
+      "soundIcons": {
+        "mute": "asset_19",
+        "unmute": "asset_20"
+      },
+      "character": {
+        "mascot": "asset_21",
+        "note": "asset_21 is the panda mascot. Collectibles go into asset_36 collection box beside/near the panda.",
+        "collectionBox": "asset_36"
+      },
+      "collectionShelf": "asset_36",
+      "stoolLift": 66,
+      "stoolLandOffset": -30,
+      "winCondition": {
+        "type": "collect-all",
+        "count": 3,
+        "objects": [
+          "asset_33",
+          "asset_34",
+          "asset_35"
+        ],
+        "note": "Collect bamboo shoot, apple, and carrot into the panda collection box to win."
+      }
+    },
+    "targetPlatforms": [
+      "meta",
+      "google-ads",
+      "tiktok",
+      "applovin",
+      "liftoff"
+    ]
+  },
+  "assets": [
+    {
+      "file": "asset_00.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "mouse",
+        "animal",
+        "rank-4",
+        "mahjong-tile",
+        "match-pair"
+      ],
+      "description": "Pink mouse mahjong tile with green number 4",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_00.png",
+      "size": 25448,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_00.png"
+    },
+    {
+      "file": "asset_01.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "cat",
+        "animal",
+        "rank-3",
+        "mahjong-tile",
+        "match-pair"
+      ],
+      "description": "Blue cat mahjong tile with green number 3",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_01.png",
+      "size": 28200,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_01.png"
+    },
+    {
+      "file": "asset_02.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "rooster",
+        "animal",
+        "rank-2",
+        "mahjong-tile",
+        "match-pair"
+      ],
+      "description": "Blue rooster mahjong tile with green number 2",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_02.png",
+      "size": 33603,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_02.png"
+    },
+    {
+      "file": "asset_03.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "zhong",
+        "red-dragon",
+        "honor",
+        "mahjong-tile",
+        "match-pair",
+        "red"
+      ],
+      "description": "Red dragon 中 mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_03.png",
+      "size": 24326,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_03.png"
+    },
+    {
+      "file": "asset_04.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "fa",
+        "green-dragon",
+        "honor",
+        "mahjong-tile",
+        "match-pair",
+        "green"
+      ],
+      "description": "Green dragon 發 mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_04.png",
+      "size": 31755,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_04.png"
+    },
+    {
+      "file": "asset_05.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "nan",
+        "south-wind",
+        "honor",
+        "mahjong-tile",
+        "match-pair",
+        "black"
+      ],
+      "description": "South wind 南 mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_05.png",
+      "size": 26942,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_05.png"
+    },
+    {
+      "file": "asset_06.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "sunflower",
+        "flower",
+        "mahjong-tile",
+        "match-pair",
+        "yellow"
+      ],
+      "description": "Sunflower flower mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_06.png",
+      "size": 31211,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_06.png"
+    },
+    {
+      "file": "asset_07.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "blossom",
+        "flower",
+        "mahjong-tile",
+        "match-pair",
+        "pink"
+      ],
+      "description": "Pink cherry blossom flower mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_07.png",
+      "size": 26991,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_07.png"
+    },
+    {
+      "file": "asset_08.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "frame",
+        "white-dragon",
+        "honor",
+        "mahjong-tile",
+        "match-pair",
+        "blue"
+      ],
+      "description": "Blue ornate frame white-dragon style mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_08.png",
+      "size": 26275,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_08.png"
+    },
+    {
+      "file": "asset_09.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "wave",
+        "ornament",
+        "mahjong-tile",
+        "match-pair",
+        "green"
+      ],
+      "description": "Green wave/scroll decorative mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_09.png",
+      "size": 32721,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_09.png"
+    },
+    {
+      "file": "asset_10.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "dots",
+        "circles",
+        "suit",
+        "mahjong-tile",
+        "match-pair"
+      ],
+      "description": "Two-dots mahjong tile (blue and floral circles)",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_10.png",
+      "size": 28963,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_10.png"
+    },
+    {
+      "file": "asset_11.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "bamboo",
+        "suit",
+        "mahjong-tile",
+        "match-pair",
+        "green"
+      ],
+      "description": "Three-bamboo mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_11.png",
+      "size": 19777,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_11.png"
+    },
+    {
+      "file": "asset_12.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "dot",
+        "circle",
+        "suit",
+        "mahjong-tile",
+        "match-pair"
+      ],
+      "description": "Ornate one-dot floral circle mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_12.png",
+      "size": 43438,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_12.png"
+    },
+    {
+      "file": "asset_13.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "characters",
+        "yi",
+        "one",
+        "suit",
+        "mahjong-tile",
+        "match-pair",
+        "blue"
+      ],
+      "description": "Character 一 (one) blue bar mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_13.png",
+      "size": 18989,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_13.png"
+    },
+    {
+      "file": "asset_14.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "characters",
+        "er",
+        "two",
+        "suit",
+        "mahjong-tile",
+        "match-pair",
+        "blue"
+      ],
+      "description": "Character 二 (two) blue bars mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_14.png",
+      "size": 22458,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_14.png"
+    },
+    {
+      "file": "asset_15.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "peacock",
+        "bird",
+        "animal",
+        "mahjong-tile",
+        "match-pair",
+        "teal"
+      ],
+      "description": "Peacock bird mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_15.png",
+      "size": 30857,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_15.png"
+    },
+    {
+      "file": "asset_16.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "bamboo",
+        "suit",
+        "mahjong-tile",
+        "match-pair",
+        "green"
+      ],
+      "description": "Two-bamboo mahjong tile",
+      "usage": [
+        "board-token",
+        "match-element",
+        "mahjong-tile"
+      ],
+      "path": "./match-majiang/asset_16.png",
+      "size": 21950,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_16.png"
+    },
+    {
+      "file": "asset_17.png",
+      "category": "ui",
+      "tags": [
+        "cta",
+        "button",
+        "wide",
+        "jade",
+        "green"
+      ],
+      "description": "Wide jade CTA button with empty center",
+      "usage": [
+        "cta-button",
+        "install-button",
+        "action-banner"
+      ],
+      "path": "./match-majiang/asset_17.png",
+      "size": 120097,
+      "dimensions": "512x180",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_17.png"
+    },
+    {
+      "file": "asset_18.png",
+      "category": "ui",
+      "tags": [
+        "win",
+        "victory",
+        "lotus",
+        "jade",
+        "medallion",
+        "text",
+        "end-screen",
+        "large"
+      ],
+      "description": "WIN SCREEN ICON: Jade lotus medallion with stylized golden main Chinese text \"胜利\". Pond/zen victory badge.",
+      "usage": [
+        "win-display",
+        "end-screen",
+        "victory-icon"
+      ],
+      "path": "./match-majiang/asset_18.png",
+      "size": 236951,
+      "dimensions": "384x384",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_18.png"
+    },
+    {
+      "file": "asset_19.png",
+      "category": "ui",
+      "tags": [
+        "sound",
+        "mute",
+        "icon",
+        "button",
+        "small"
+      ],
+      "description": "Mute sound icon",
+      "usage": [
+        "sound-toggle",
+        "mute-button",
+        "ui-icon"
+      ],
+      "path": "./match-majiang/asset_19.png",
+      "size": 19753,
+      "dimensions": "128x128",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_19.png"
+    },
+    {
+      "file": "asset_20.png",
+      "category": "ui",
+      "tags": [
+        "sound",
+        "unmute",
+        "icon",
+        "button",
+        "small"
+      ],
+      "description": "Unmute sound icon",
+      "usage": [
+        "sound-toggle",
+        "unmute-button",
+        "ui-icon"
+      ],
+      "path": "./match-majiang/asset_20.png",
+      "size": 18150,
+      "dimensions": "128x128",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_20.png"
+    },
+    {
+      "file": "asset_21.png",
+      "category": "character",
+      "tags": [
+        "panda",
+        "mascot",
+        "cute",
+        "character",
+        "protagonist",
+        "lotus-leaf",
+        "lily-pad",
+        "medium"
+      ],
+      "description": "PANDA MASCOT: Cute panda standing on a green lotus leaf with a pink lotus bud — the game's protagonist and mascot. Place next to the board as the friendly character guide.",
+      "usage": [
+        "character-portrait",
+        "mascot",
+        "guide-character"
+      ],
+      "path": "./match-majiang/asset_21.png",
+      "size": 124480,
+      "dimensions": "304x416",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_21.png"
+    },
+    {
+      "file": "asset_22.png",
+      "category": "background",
+      "tags": [
+        "board-background",
+        "primary-board-bg",
+        "panel",
+        "portrait",
+        "vertical",
+        "bamboo",
+        "simple",
+        "minimal",
+        "felt",
+        "mahjong-table",
+        "large"
+      ],
+      "description": "BOARD BACKGROUND: Simple soft sage felt mahjong tray with a thin bamboo rim only — large empty play surface for tiles. Clean RGBA outside; no ornate frame decorations.",
+      "usage": [
+        "board-background",
+        "game-board-surface",
+        "primary-board-bg"
+      ],
+      "path": "./match-majiang/asset_22.png",
+      "size": 3389120,
+      "dimensions": "1166x1800",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_22.png"
+    },
+    {
+      "file": "asset_23.png",
+      "category": "decoration",
+      "tags": [
+        "lily-pad",
+        "pond",
+        "nature",
+        "decor",
+        "green"
+      ],
+      "description": "Lily pad (and nearby lotus accents) extracted from pond screenshot.",
+      "usage": [
+        "scene-decoration",
+        "foreground-prop"
+      ],
+      "path": "./match-majiang/asset_23.png",
+      "size": 151324,
+      "dimensions": "420x360",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_23.png"
+    },
+    {
+      "file": "asset_24.png",
+      "category": "decoration",
+      "tags": [
+        "lily-pad",
+        "pond",
+        "nature",
+        "decor",
+        "green"
+      ],
+      "description": "Lily pad (and nearby lotus accents) extracted from pond screenshot.",
+      "usage": [
+        "scene-decoration",
+        "foreground-prop"
+      ],
+      "path": "./match-majiang/asset_24.png",
+      "size": 134906,
+      "dimensions": "440x280",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_24.png"
+    },
+    {
+      "file": "asset_25.png",
+      "category": "decoration",
+      "tags": [
+        "lotus",
+        "water-lily",
+        "flower",
+        "pond",
+        "nature",
+        "decor",
+        "pink"
+      ],
+      "description": "Pink lotus / water lily decoration extracted from pond scene.",
+      "usage": [
+        "scene-decoration",
+        "foreground-prop"
+      ],
+      "path": "./match-majiang/asset_25.png",
+      "size": 34839,
+      "dimensions": "231x129",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_25.png"
+    },
+    {
+      "file": "asset_26.png",
+      "category": "decoration",
+      "tags": [
+        "lotus",
+        "water-lily",
+        "flower",
+        "pond",
+        "nature",
+        "decor",
+        "pink"
+      ],
+      "description": "Pink lotus / water lily decoration extracted from pond scene.",
+      "usage": [
+        "scene-decoration",
+        "foreground-prop"
+      ],
+      "path": "./match-majiang/asset_26.png",
+      "size": 32512,
+      "dimensions": "204x135",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_26.png"
+    },
+    {
+      "file": "asset_27.png",
+      "category": "ui",
+      "tags": [
+        "lose",
+        "failure",
+        "cracked-tile",
+        "lotus",
+        "jade",
+        "text",
+        "end-screen",
+        "large"
+      ],
+      "description": "Lose/failure badge with stylized main Chinese text \"失败\" — cracked mahjong tile and lotus in sage jade frame.",
+      "usage": [
+        "lose-display",
+        "end-screen",
+        "failure-icon"
+      ],
+      "path": "./match-majiang/asset_27.png",
+      "size": 195624,
+      "dimensions": "384x384",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_27.png"
+    },
+    {
+      "file": "asset_28.png",
+      "category": "effect",
+      "tags": [
+        "dim",
+        "locked",
+        "overlay",
+        "blocked-tile"
+      ],
+      "description": "Semi-transparent dim overlay for locked/buried mahjong tiles.",
+      "usage": [
+        "locked-overlay",
+        "blocked-state"
+      ],
+      "path": "./match-majiang/asset_28.png",
+      "size": 544,
+      "dimensions": "160x192",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_28.png"
+    },
+    {
+      "file": "asset_29.png",
+      "category": "effect",
+      "tags": [
+        "glow",
+        "select",
+        "highlight",
+        "overlay"
+      ],
+      "description": "Golden selection highlight frame for free/selected mahjong tile.",
+      "usage": [
+        "selection-highlight",
+        "free-tile-glow",
+        "overlay"
+      ],
+      "path": "./match-majiang/asset_29.png",
+      "size": 848,
+      "dimensions": "184x216",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_29.png"
+    },
+    {
+      "file": "asset_30.png",
+      "category": "ui",
+      "tags": [
+        "panel",
+        "end-screen",
+        "rounded",
+        "jade"
+      ],
+      "description": "Jade-framed end-screen panel for win/lose overlay text.",
+      "usage": [
+        "end-screen-panel",
+        "dialog-background"
+      ],
+      "path": "./match-majiang/asset_30.png",
+      "size": 3226,
+      "dimensions": "512x720",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_30.png"
+    },
+    {
+      "file": "asset_31.png",
+      "category": "reference",
+      "tags": [
+        "reference",
+        "screenshot",
+        "layout",
+        "source"
+      ],
+      "description": "ORIGINAL SCREENSHOT reference — butterfly mahjong layout on pond scene (source for theme extraction).",
+      "usage": [
+        "layout-reference",
+        "theme-source"
+      ],
+      "path": "./match-majiang/asset_31.png",
+      "size": 597509,
+      "dimensions": "576x1024",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_31.png"
+    },
+    {
+      "file": "asset_32.png",
+      "category": "background",
+      "tags": [
+        "main-background",
+        "pond",
+        "nature",
+        "lily",
+        "primary-bg",
+        "full-size",
+        "scenic"
+      ],
+      "description": "MAIN BACKGROUND: Clean serene green pond scene with misty sky, tree silhouettes, lily pads and lotus — primary mahjong solitaire backdrop (no tiles).",
+      "usage": [
+        "main-background",
+        "scene",
+        "game-board-backdrop",
+        "end-screen-background"
+      ],
+      "path": "./match-majiang/asset_32.png",
+      "size": 3072462,
+      "dimensions": "2048x2048",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_32.png"
+    },
+    {
+      "file": "asset_33.png",
+      "category": "special",
+      "tags": [
+        "special",
+        "collect-to-bottom",
+        "collectible",
+        "bamboo-shoot",
+        "bamboo",
+        "zhusun",
+        "objective",
+        "panda-food"
+      ],
+      "description": "SPECIAL OBJECT: Cute bamboo shoot (zhusun) collectible for the panda — one of three foods to collect.",
+      "usage": [
+        "special-object",
+        "collectible",
+        "objective-icon",
+        "collection-item"
+      ],
+      "path": "./match-majiang/asset_33.png",
+      "size": 28905,
+      "dimensions": "200x200",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_33.png"
+    },
+    {
+      "file": "asset_34.png",
+      "category": "special",
+      "tags": [
+        "special",
+        "collect-to-bottom",
+        "collectible",
+        "apple",
+        "fruit",
+        "objective",
+        "panda-food",
+        "red"
+      ],
+      "description": "SPECIAL OBJECT: Cute red apple collectible for the panda — one of three foods to collect.",
+      "usage": [
+        "special-object",
+        "collectible",
+        "objective-icon",
+        "collection-item"
+      ],
+      "path": "./match-majiang/asset_34.png",
+      "size": 42728,
+      "dimensions": "200x200",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_34.png"
+    },
+    {
+      "file": "asset_35.png",
+      "category": "special",
+      "tags": [
+        "special",
+        "collect-to-bottom",
+        "collectible",
+        "carrot",
+        "vegetable",
+        "objective",
+        "panda-food",
+        "orange"
+      ],
+      "description": "SPECIAL OBJECT: Cute carrot collectible for the panda — one of three foods to collect.",
+      "usage": [
+        "special-object",
+        "collectible",
+        "objective-icon",
+        "collection-item"
+      ],
+      "path": "./match-majiang/asset_35.png",
+      "size": 27043,
+      "dimensions": "200x200",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_35.png"
+    },
+    {
+      "file": "asset_36.png",
+      "category": "ui",
+      "tags": [
+        "collection-box",
+        "shelf",
+        "header",
+        "jade",
+        "bamboo",
+        "panda-theme",
+        "wide",
+        "collect-stool"
+      ],
+      "description": "COLLECTION BOX: Soft jade-green bamboo tray for the panda mascot — cream wells (×3) for bamboo shoot / apple / carrot, panda head + paw accents, pink lotus end ornaments.",
+      "usage": [
+        "collection-shelf",
+        "collection-box",
+        "header-bar",
+        "hud"
+      ],
+      "path": "./match-majiang/asset_36.png",
+      "size": 748891,
+      "dimensions": "1170x470",
+      "format": "png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-majiang/asset_36.png"
+    }
+  ],
+  "baseUrl": "http://localhost:4000/uploads/playable-assets/match-majiang",
+  "game": "match-majiang",
+  "gameplaySpec": "gameplay-spec.md"
+}

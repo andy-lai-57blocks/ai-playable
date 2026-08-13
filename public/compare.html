@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:100%;height:100%;overflow:hidden;touch-action:manipulation;-webkit-tap-highlight-color:transparent;font-family:system-ui,-apple-system,sans-serif;}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg, #1a1a2e, #2d1b4e);
+    color:#ffffff;
+    -webkit-user-select:none;user-select:none;
+  }
+  #playable-root{
+    position:relative;
+    width:100%;height:100%;
+    overflow:hidden;
+    background:linear-gradient(135deg, #1a1a2e, #2d1b4e);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000}
+#game-container{width:100%;height:100%}
+</style>
+</head>
+<body>
+<div id="playable-root">
+<div id="game-container"></div>
+</div>
+<script>
+// ── Phaser Match-3 (Official Bejeweled Logic) ──
+const GEM_TYPES = ["👑","💎","🔶","⭐"];
+const GEM_IMAGES = ["http://localhost:3002/playable-assets/match/asset_00.png","http://localhost:3002/playable-assets/match/asset_01.png","http://localhost:3002/playable-assets/match/asset_03.png","http://localhost:3002/playable-assets/match/asset_27.png"];
+const GEM_COUNT = 4;
+const COLS = 6, ROWS = 8;
+const TARGET = 400, TIME_LIMIT = 60;
+const MAIN_BG = "http://localhost:3002/playable-assets/match/asset_08.png";
+const BOARD_BG = "http://localhost:3002/playable-assets/match/asset_21.png";
+const CHAR_URL = "http://localhost:3002/playable-assets/match/asset_17.png";
+const CAT_SHELF = "http://localhost:3002/playable-assets/match/asset_15.png";
+const PARTICLE_COLORS = [0xffd700, 0xffaa00, 0xff6600, 0xffffff]; // gold style
+const ACCENT_COLOR = '#ffd700';
+
+// ── Preload all images ──
+const IMG_LIST = [
+  ...GEM_IMAGES.map((url,i) => ({key:'gem'+i, url})),
+  {key:'mainBg', url:MAIN_BG},
+  {key:'boardBg', url:BOARD_BG},
+  {key:'char', url:CHAR_URL},
+  {key:'catShelf', url:CAT_SHELF},
+  {key:'winIcon', url:WIN_ICON},
+  {key:'loseIcon', url:LOSE_ICON},
+].filter(e => e.url);
+
+let imgsLoaded = 0;
+const loadedImgs = {};
+IMG_LIST.forEach(({key, url}) => {
+  const img = new Image();
+  img.onload = img.onerror = () => {
+    loadedImgs[key] = img;
+    if (++imgsLoaded === IMG_LIST.length) startGame();
+  };
+  img.src = url;
+});
+if (IMG_LIST.length === 0) startGame();
+
+function startGame() {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js';
+  script.onload = () => {
+    const container = document.getElementById('game-container');
+    const W = container.clientWidth, H = container.clientHeight;
+
+    class MatchScene extends Phaser.Scene {
+      constructor() { super('match'); }
+
+      preload() {
+        // Inject preloaded native images as Phaser textures
+        for (const key in loadedImgs) {
+          if (!this.textures.exists(key) && loadedImgs[key].complete && loadedImgs[key].naturalWidth > 0) {
+            this.textures.addImage(key, loadedImgs[key]);
+          }
+        }
+      }
+
+      create() {
+        const S = this;
+        const vw = S.scale.width, vh = S.scale.height;
+
+        // ── Background (scale-to-fill) ──
+        if (S.textures.exists('mainBg')) {
+          const tex = S.textures.get('mainBg').source[0];
+          const s = Math.max(vw / tex.width, vh / tex.height);
+          S.add.image(vw/2, vh/2, 'mainBg').setDisplaySize(tex.width*s, tex.height*s);
+        }
+        S.add.rectangle(vw/2, vh/2, vw, vh, 0x000000, 0.3).setDepth(-1);
+
+        // ── Particle texture for match burst ──
+        const pt = S.textures.createCanvas('particle', 8, 8);
+        const pctx = pt.getContext();
+        pctx.fillStyle = '#fff';
+        pctx.beginPath(); pctx.arc(4, 4, 3, 0, Math.PI * 2); pctx.fill();
+        pt.refresh();
+
+        function burstParticles(x, y) {
+          const colors = PARTICLE_COLORS;
+          for (let i = 0; i < 12; i++) {
+            const p = S.add.image(x, y, 'particle')
+              .setTint(colors[Math.floor(Math.random() * colors.length)])
+              .setScale(0.5 + Math.random() * 0.8)
+              .setAlpha(1)
+              .setDepth(10);
+            const angle = Math.random() * Math.PI * 2;
+            const speed = 40 + Math.random() * 60;
+            S.tweens.add({
+              targets: p,
+              x: x + Math.cos(angle) * speed,
+              y: y + Math.sin(angle) * speed,
+              alpha: 0,
+              scaleX: 0.1, scaleY: 0.1,
+              duration: 300 + Math.random() * 200,
+              ease: 'Quad.easeOut',
+              onComplete: () => p.destroy()
+            });
+          }
+        }
+
+        // ── Board sizing (shifted left to make room for cat shelf on right) ──
+        const gemSize = Math.floor(Math.min(vw * 0.82 / COLS, vh * 0.58 / ROWS) * 1.15);
+        const boardW = gemSize * COLS;
+        const boardH = gemSize * ROWS;
+        const shelfH = boardH;
+        const shelfW = shelfH * (440 / 943);
+        const shelfGap = gemSize * 0.5;
+        const totalW = boardW + shelfGap + shelfW;
+        const boardX = (vw - totalW) / 2;
+        const boardY = vh * 0.234;
+
+        // ── Board background panel (decorative) ──
+        if (S.textures.exists('boardBg')) {
+          const panelH = boardH * 1.06;
+          const panelW = panelH * (562 / 754);
+          S.add.image(boardX + boardW/2, boardY + boardH/2, 'boardBg')
+            .setDisplaySize(panelW, panelH).setDepth(0);
+        }
+
+        // ── Cat on shelf (right of board, same height) ──
+        if (S.textures.exists('catShelf') && S.textures.exists('char')) {
+          const shelfX = boardX + boardW + shelfGap + shelfW / 2;
+          S.add.image(shelfX, boardY + shelfH / 2, 'catShelf')
+            .setDisplaySize(shelfW, shelfH).setDepth(5);
+          const catH = shelfH * 0.28;
+          const catW = catH * (243 / 290);
+          S.add.image(shelfX, boardY + 25, 'char')
+            .setDisplaySize(catW, catH).setDepth(6);
+        }
+
+        // ═══════════════════════════════════════
+        //  Official Bejeweled Game Logic
+        // ═══════════════════════════════════════
+
+        const SWAP_SPEED = 160;
+        const FALL_SPEED = 100;
+        const DESTROY_SPEED = 200;
+
+        let canPick = true;
+        let selectedGem = null;
+        let gameArray = [];   // gameArray[row][col] = {gemColor, gemSprite, isEmpty}
+        let poolArray = [];   // sprite pool for reuse
+        let score = 0;
+        let gameOver = false;
+        let timeLeft = TIME_LIMIT;
+
+        // ── Draw initial field ──
+        function drawField() {
+          for (let r = 0; r < ROWS; r++) {
+            gameArray[r] = [];
+            for (let c = 0; c < COLS; c++) {
+              const x = boardX + c * gemSize + gemSize / 2;
+              const y = boardY + r * gemSize + gemSize / 2;
+              let gem = createGemSprite(x, y);
+              do {
+                const color = Phaser.Math.Between(0, GEM_COUNT - 1);
+                setGemFrame(gem, color);
+                gameArray[r][c] = { gemColor: color, gemSprite: gem, isEmpty: false };
+              } while (isMatch(r, c));
+            }
+          }
+        }
+
+        function createGemSprite(x, y) {
+          let sprite;
+          if (GEM_IMAGES.length > 0 && S.textures.exists('gem0')) {
+            sprite = S.add.image(x, y, 'gem0');
+            sprite.setDisplaySize(gemSize * 0.9, gemSize * 0.9);
+          } else {
+            sprite = S.add.text(x, y, GEM_TYPES[0], {
+              fontSize: Math.floor(gemSize * 0.5) + 'px',
+              fontFamily: '"Apple Color Emoji","Segoe UI Emoji",sans-serif',
+            }).setOrigin(0.5);
+          }
+          sprite.setDepth(1);
+          return sprite;
+        }
+
+        function setGemFrame(sprite, colorIndex) {
+          if (GEM_IMAGES.length > 0 && S.textures.exists('gem' + colorIndex)) {
+            sprite.setTexture('gem' + colorIndex);
+            sprite.setDisplaySize(gemSize * 0.9, gemSize * 0.9);
+          } else if (sprite.type === 'Text') {
+            sprite.setText(GEM_TYPES[colorIndex] || '?');
+          }
+        }
+
+        // ── Match detection ──
+        function isMatch(row, col) {
+          return isHorizontalMatch(row, col) || isVerticalMatch(row, col);
+        }
+
+        function isHorizontalMatch(row, col) {
+          return gemAt(row, col).gemColor === gemAt(row, col - 1).gemColor
+              && gemAt(row, col).gemColor === gemAt(row, col - 2).gemColor;
+        }
+
+        function isVerticalMatch(row, col) {
+          return gemAt(row, col).gemColor === gemAt(row - 1, col).gemColor
+              && gemAt(row, col).gemColor === gemAt(row - 2, col).gemColor;
+        }
+
+        function gemAt(row, col) {
+          if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return { gemColor: -1 };
+          return gameArray[row][col];
+        }
+
+        function matchInBoard() {
+          for (let r = 0; r < ROWS; r++)
+            for (let c = 0; c < COLS; c++)
+              if (isMatch(r, c)) return true;
+          return false;
+        }
+
+        // ── Gem selection (tap + drag/swipe) ──
+        function getGemRow(gem) { return Math.floor((gem.gemSprite.y - boardY) / gemSize); }
+        function getGemCol(gem) { return Math.floor((gem.gemSprite.x - boardX) / gemSize); }
+        function areNext(gem1, gem2) {
+          return Math.abs(getGemRow(gem1) - getGemRow(gem2)) + Math.abs(getGemCol(gem1) - getGemCol(gem2)) === 1;
+        }
+
+        let dragRow = -1, dragCol = -1;
+        S.input.on('pointerdown', (pointer) => {
+          if (!canPick || gameOver) return;
+          const col = Math.floor((pointer.x - boardX) / gemSize);
+          const row = Math.floor((pointer.y - boardY) / gemSize);
+          const pickedGem = gemAt(row, col);
+          if (pickedGem.gemColor === -1 || pickedGem.isEmpty) return;
+          dragRow = row; dragCol = col;
+
+          if (selectedGem === null) {
+            selectedGem = pickedGem;
+          } else if (getGemRow(selectedGem) === row && getGemCol(selectedGem) === col) {
+            selectedGem = null;
+          } else if (areNext(pickedGem, selectedGem)) {
+            swapGems(selectedGem, pickedGem, true);
+          } else {
+            selectedGem = pickedGem;
+          }
+        });
+
+        S.input.on('pointermove', (pointer) => {
+          if (!canPick || gameOver || selectedGem === null) return;
+          if (!pointer.isDown) return;
+          const dx = pointer.x - (boardX + dragCol * gemSize + gemSize / 2);
+          const dy = pointer.y - (boardY + dragRow * gemSize + gemSize / 2);
+          const threshold = gemSize * 0.35;
+          if (Math.abs(dx) < threshold && Math.abs(dy) < threshold) return;
+
+          let dr = 0, dc = 0;
+          if (Math.abs(dx) > Math.abs(dy)) { dc = dx > 0 ? 1 : -1; }
+          else { dr = dy > 0 ? 1 : -1; }
+
+          const nr = dragRow + dr, nc = dragCol + dc;
+          const neighbor = gemAt(nr, nc);
+          if (neighbor.gemColor !== -1 && !neighbor.isEmpty) {
+            swapGems(selectedGem, neighbor, true);
+          }
+        });
+
+        S.input.on('pointerup', () => { dragRow = -1; dragCol = -1; });
+
+        // ── Swap logic ──
+        let swappingGems = 0;
+
+        function swapGems(gem1, gem2, swapBack) {
+          swappingGems = 2;
+          canPick = false;
+          const fromColor = gem1.gemColor;
+          const fromSprite = gem1.gemSprite;
+          const toColor = gem2.gemColor;
+          const toSprite = gem2.gemSprite;
+          const gem1Row = getGemRow(gem1);
+          const gem1Col = getGemCol(gem1);
+          const gem2Row = getGemRow(gem2);
+          const gem2Col = getGemCol(gem2);
+
+          gameArray[gem1Row][gem1Col].gemColor = toColor;
+          gameArray[gem1Row][gem1Col].gemSprite = toSprite;
+          gameArray[gem2Row][gem2Col].gemColor = fromColor;
+          gameArray[gem2Row][gem2Col].gemSprite = fromSprite;
+
+          tweenGem(gem1, swapBack);
+          tweenGem(gem2, swapBack);
+        }
+
+        function tweenGem(gem, swapBack) {
+          const row = getGemRow(gem);
+          const col = getGemCol(gem);
+          S.tweens.add({
+            targets: gameArray[row][col].gemSprite,
+            x: boardX + col * gemSize + gemSize / 2,
+            y: boardY + row * gemSize + gemSize / 2,
+            duration: SWAP_SPEED,
+            onComplete: () => {
+              swappingGems--;
+              if (swappingGems === 0) {
+                if (!matchInBoard() && swapBack) {
+                  swapGems(
+                    gameArray[getGemRow(gem)][getGemCol(gem)],
+                    gem,
+                    false
+                  );
+                } else if (matchInBoard()) {
+                  handleMatches();
+                } else {
+                  canPick = true;
+                  selectedGem = null;
+                }
+              }
+            }
+          });
+        }
+
+        // ── Match handling ──
+        function handleMatches() {
+          const removeMap = [];
+          for (let r = 0; r < ROWS; r++) {
+            removeMap[r] = [];
+            for (let c = 0; c < COLS; c++) removeMap[r].push(0);
+          }
+
+          // Mark horizontal matches
+          for (let r = 0; r < ROWS; r++) {
+            let colorStreak = 1, currentColor = -1, startStreak = 0;
+            for (let c = 0; c < COLS; c++) {
+              const color = gameArray[r][c].gemColor;
+              if (color === currentColor) { colorStreak++; }
+              if (color !== currentColor || c === COLS - 1) {
+                if (colorStreak >= 3) {
+                  for (let k = 0; k < colorStreak; k++) removeMap[r][startStreak + k]++;
+                }
+                startStreak = c;
+                colorStreak = 1;
+                currentColor = color;
+              }
+            }
+          }
+
+          // Mark vertical matches
+          for (let c = 0; c < COLS; c++) {
+            let colorStreak = 1, currentColor = -1, startStreak = 0;
+            for (let r = 0; r < ROWS; r++) {
+              const color = gameArray[r][c].gemColor;
+              if (color === currentColor) { colorStreak++; }
+              if (color !== currentColor || r === ROWS - 1) {
+                if (colorStreak >= 3) {
+                  for (let k = 0; k < colorStreak; k++) removeMap[startStreak + k][c]++;
+                }
+                startStreak = r;
+                colorStreak = 1;
+                currentColor = color;
+              }
+            }
+          }
+
+          destroyGems(removeMap);
+        }
+
+        function destroyGems(removeMap) {
+          let destroyed = 0;
+          for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+              if (removeMap[r][c] > 0) {
+                destroyed++;
+                const gx = boardX + c * gemSize + gemSize / 2;
+                const gy = boardY + r * gemSize + gemSize / 2;
+                burstParticles(gx, gy);
+                S.tweens.add({
+                  targets: gameArray[r][c].gemSprite,
+                  alpha: 0, scaleX: 0.3, scaleY: 0.3,
+                  duration: DESTROY_SPEED,
+                  onComplete: () => {
+                    destroyed--;
+                    gameArray[r][c].gemSprite.visible = false;
+                    gameArray[r][c].gemSprite.setScale(1);
+                    gameArray[r][c].gemSprite.setAlpha(1);
+                    poolArray.push(gameArray[r][c].gemSprite);
+                    if (destroyed === 0) {
+                      makeGemsFall();
+                      replenishField();
+                    }
+                  }
+                });
+                gameArray[r][c].isEmpty = true;
+                score += 10;
+                updateUI();
+              }
+            }
+          }
+        }
+
+        // ── Gravity ──
+        function makeGemsFall() {
+          for (let r = ROWS - 2; r >= 0; r--) {
+            for (let c = 0; c < COLS; c++) {
+              if (!gameArray[r][c].isEmpty) {
+                const fallTiles = holesBelow(r, c);
+                if (fallTiles > 0) {
+                  const targetY = gameArray[r][c].gemSprite.y + fallTiles * gemSize;
+                  S.tweens.add({
+                    targets: gameArray[r][c].gemSprite,
+                    y: targetY,
+                    duration: FALL_SPEED * fallTiles
+                  });
+                  gameArray[r + fallTiles][c] = {
+                    gemSprite: gameArray[r][c].gemSprite,
+                    gemColor: gameArray[r][c].gemColor,
+                    isEmpty: false
+                  };
+                  gameArray[r][c].isEmpty = true;
+                }
+              }
+            }
+          }
+        }
+
+        function holesBelow(row, col) {
+          let result = 0;
+          for (let r = row + 1; r < ROWS; r++) {
+            if (gameArray[r][col].isEmpty) result++;
+          }
+          return result;
+        }
+
+        // ── Refill ──
+        function replenishField() {
+          let replenished = 0;
+          for (let c = 0; c < COLS; c++) {
+            const emptySpots = holesInCol(c);
+            if (emptySpots > 0) {
+              for (let r = 0; r < emptySpots; r++) {
+                replenished++;
+                const color = Phaser.Math.Between(0, GEM_COUNT - 1);
+                const startY = boardY + gemSize / 2; // top edge of board
+                const sprite = poolArray.pop();
+                if (sprite) {
+                  sprite.visible = true;
+                  sprite.setScale(1);
+                  sprite.setAlpha(0);
+                  sprite.setDepth(1);
+                  sprite.x = boardX + c * gemSize + gemSize / 2;
+                  sprite.y = startY;
+                  setGemFrame(sprite, color);
+                }
+                gameArray[r][c] = {
+                  gemColor: color,
+                  gemSprite: sprite || createGemSprite(
+                    boardX + c * gemSize + gemSize / 2, startY
+                  ),
+                  isEmpty: false
+                };
+                if (!sprite) gameArray[r][c].gemSprite.setAlpha(0);
+                S.tweens.add({
+                  targets: gameArray[r][c].gemSprite,
+                  y: boardY + r * gemSize + gemSize / 2,
+                  alpha: 1,
+                  duration: FALL_SPEED * emptySpots,
+                  onComplete: () => {
+                    replenished--;
+                    if (replenished === 0) {
+                      if (matchInBoard()) {
+                        S.time.delayedCall(150, () => handleMatches());
+                      } else {
+                        canPick = true;
+                        selectedGem = null;
+                      }
+                      if (score >= TARGET) endGame('win');
+                    }
+                  }
+                });
+              }
+            }
+          }
+          if (replenished === 0) {
+            canPick = true;
+            selectedGem = null;
+          }
+        }
+
+        function holesInCol(col) {
+          let result = 0;
+          for (let r = 0; r < ROWS; r++) {
+            if (gameArray[r][col].isEmpty) result++;
+          }
+          return result;
+        }
+
+        // ── UI text ──
+        const uiStyle = {
+          fontSize: '18px', fontFamily: 'system-ui,sans-serif',
+          color: ACCENT_COLOR, fontStyle: 'bold',
+          stroke: '#fff', strokeThickness: 3
+        };
+        const timerText = S.add.text(vw - 16, 12, '⏱ ' + TIME_LIMIT + 's', uiStyle)
+          .setOrigin(1, 0).setDepth(10);
+        const scoreText = S.add.text(16, 12, '⭐ ' + score + ' / ' + TARGET, uiStyle)
+          .setOrigin(0, 0).setDepth(10);
+
+        function updateUI() {
+          scoreText.setText('⭐ ' + score + ' / ' + TARGET);
+        }
+
+        // ── Timer ──
+        S.time.addEvent({
+          delay: 1000,
+          repeat: TIME_LIMIT - 1,
+          callback: () => {
+            if (gameOver) return;
+            timeLeft--;
+            timerText.setText('⏱ ' + timeLeft + 's');
+            if (timeLeft <= 0) endGame('lose');
+          }
+        });
+
+        // ── End Game ──
+        const endOverlay = S.add.rectangle(vw/2, vh/2, vw, vh, 0x000000, 0.85)
+          .setDepth(20).setVisible(false);
+        const endIcon = S.add.image(vw/2, vh/2, 'winIcon')
+          .setDepth(21).setVisible(false);
+
+        function endGame(result) {
+          if (gameOver) return;
+          gameOver = true;
+          canPick = false;
+          endOverlay.setVisible(true);
+
+          const key = result === 'win' ? 'winIcon' : 'loseIcon';
+          if (S.textures.exists(key)) {
+            endIcon.setTexture(key);
+            endIcon.setVisible(true);
+            const tex = S.textures.get(key).source[0];
+            const targetScale = Math.min(vw * 0.36, 360) / tex.width;
+            endIcon.setScale(targetScale);
+          }
+
+          S.tweens.add({
+            targets: endIcon,
+            scaleX: { from: endIcon.scaleX * 0.4, to: endIcon.scaleX },
+            scaleY: { from: endIcon.scaleY * 0.4, to: endIcon.scaleY },
+            alpha:  { from: 0, to: 1 },
+            duration: 350,
+            ease: 'Back.easeOut'
+          });
+        }
+
+        // ── Init ──
+        drawField();
+      }
+    }
+
+    const config = {
+      type: Phaser.AUTO,
+      width: W,
+      height: H,
+      parent: 'game-container',
+      backgroundColor: '#1a1a2e',
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+      },
+      scene: [MatchScene],
+    };
+
+    new Phaser.Game(config);
+  };
+  document.head.appendChild(script);
+}
+</script>
+</body>
+</html>

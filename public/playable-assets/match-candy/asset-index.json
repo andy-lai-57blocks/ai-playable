@@ -1,0 +1,573 @@
+{
+  "$schema": "57creative-playable-asset-index",
+  "source": {
+    "url": "generated-local-theme://match-candy",
+    "engine": "Theme Spec Pack",
+    "extractedAt": "2026-08-09",
+    "totalAssets": 21,
+    "format": "png",
+    "note": "Original candy match-3 theme; asset_20 board panel added to mirror match/asset_21 role."
+  },
+  "globalTags": {
+    "theme": [
+      "candy",
+      "sugar",
+      "sweet",
+      "casual",
+      "colorful"
+    ],
+    "colorPalette": [
+      "candy-blue",
+      "candy-green",
+      "candy-red",
+      "chocolate-brown",
+      "mint-teal",
+      "sky-blue"
+    ],
+    "mood": [
+      "playful",
+      "bright",
+      "juicy",
+      "cheerful"
+    ],
+    "artStyle": [
+      "3d-glossy",
+      "casual-game",
+      "candy-coated"
+    ],
+    "gameGenre": [
+      "match3",
+      "puzzle",
+      "collection"
+    ],
+    "gameMechanics": {
+      "type": "collect-to-bottom",
+      "description": "Swap adjacent candies to match 3+. Special objects (lemon, heart, chocolate) fall down as candies below them are cleared. Collect all 3 objects by dropping them to the bottom row — they are placed on the pink frosting candy collection box. Collect all 3 to win; fail after 3 minutes.",
+      "boardGems": [
+        "asset_00",
+        "asset_01",
+        "asset_03",
+        "asset_04",
+        "asset_06"
+      ],
+      "specialObjects": [
+        "asset_02",
+        "asset_05",
+        "asset_12"
+      ],
+      "specialGlowEffects": {},
+      "collectionShelf": "asset_11",
+      "stoolLift": 36,
+      "stoolLandOffset": 0,
+      "charYOffset": 50,
+      "boardYOffset": 20,
+      "character": {
+        "mascot": "asset_21",
+        "note": "asset_21 is a cute candy bear mascot. Place the bear next to the board as the game's character."
+      },
+      "soundIcons": {
+        "mute": "asset_17",
+        "unmute": "asset_18"
+      }
+    },
+    "targetPlatforms": [
+      "meta",
+      "google-ads",
+      "tiktok",
+      "applovin",
+      "liftoff"
+    ]
+  },
+  "assets": [
+    {
+      "file": "asset_00.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "blue",
+        "striped",
+        "sphere",
+        "candy",
+        "common"
+      ],
+      "description": "Glossy blue spherical candy with horizontal white stripes. Edge-hardened and resized to 256px for cleaner playable downscale.",
+      "usage": [
+        "board-token",
+        "match-element"
+      ],
+      "size": 9905,
+      "dimensions": "80x80",
+      "format": "png",
+      "path": "./match-candy/asset_00.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_00.png"
+    },
+    {
+      "file": "asset_01.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "green",
+        "striped",
+        "vertical",
+        "candy",
+        "common"
+      ],
+      "description": "Glossy green rounded-rectangle candy with vertical white stripes. Edge-hardened and resized to 256px for cleaner playable downscale.",
+      "usage": [
+        "board-token",
+        "match-element"
+      ],
+      "size": 12034,
+      "dimensions": "80x80",
+      "format": "png",
+      "path": "./match-candy/asset_01.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_01.png"
+    },
+    {
+      "file": "asset_02.png",
+      "category": "special",
+      "tags": [
+        "special-object",
+        "collect-to-bottom",
+        "yellow",
+        "teardrop",
+        "lemon",
+        "candy"
+      ],
+      "description": "Yellow glossy lemon-drop teardrop candy — Candy Crush Soda–style soft jelly token. Edge-hardened 256px.",
+      "usage": [
+        "board-token",
+        "match-element"
+      ],
+      "size": 7662,
+      "dimensions": "80x80",
+      "format": "png",
+      "path": "./match-candy/asset_02.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_02.png"
+    },
+    {
+      "file": "asset_03.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "cyan",
+        "hexagon",
+        "candy",
+        "common"
+      ],
+      "description": "Cyan teal soft hexagonal pillow candy — Candy Crush Soda–style jelly token (not a gem). Edge-hardened 256px.",
+      "usage": [
+        "board-token",
+        "match-element"
+      ],
+      "size": 9221,
+      "dimensions": "80x80",
+      "format": "png",
+      "path": "./match-candy/asset_03.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_03.png"
+    },
+    {
+      "file": "asset_04.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "chocolate",
+        "sprinkles",
+        "sphere",
+        "candy",
+        "common"
+      ],
+      "description": "Chocolate sprinkle sphere candy — match-3 board gem. Edge-hardened and resized to 256px for cleaner playable downscale.",
+      "usage": [
+        "board-token",
+        "match-element"
+      ],
+      "size": 13875,
+      "dimensions": "80x80",
+      "format": "png",
+      "path": "./match-candy/asset_04.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_04.png"
+    },
+    {
+      "file": "asset_05.png",
+      "category": "special",
+      "tags": [
+        "special-object",
+        "collect-to-bottom",
+        "purple",
+        "heart",
+        "candy"
+      ],
+      "description": "Purple glossy heart candy — match-3 board gem. Distinct from blue striped sphere (asset_00). Edge-hardened 256px.",
+      "usage": [
+        "board-token",
+        "match-element"
+      ],
+      "size": 10392,
+      "dimensions": "80x80",
+      "format": "png",
+      "path": "./match-candy/asset_05.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_05.png"
+    },
+    {
+      "file": "asset_06.png",
+      "category": "gem",
+      "tags": [
+        "board-token",
+        "red",
+        "wrapped",
+        "square",
+        "candy",
+        "common"
+      ],
+      "description": "Red wrapped square candy — match-3 board gem. Edge-hardened and resized to 256px for cleaner playable downscale.",
+      "usage": [
+        "board-token",
+        "match-element"
+      ],
+      "size": 11904,
+      "dimensions": "80x80",
+      "format": "png",
+      "path": "./match-candy/asset_06.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_06.png"
+    },
+    {
+      "file": "asset_07.png",
+      "category": "effect",
+      "tags": [
+        "glow",
+        "sparkle",
+        "rainbow",
+        "overlay"
+      ],
+      "description": "Rainbow sparkle glow overlay for color-bomb.",
+      "usage": [
+        "glow-effect",
+        "overlay"
+      ],
+      "size": 33828,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_07.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_07.png"
+    },
+    {
+      "file": "asset_08.png",
+      "category": "effect",
+      "tags": [
+        "glow",
+        "sparkle",
+        "cyan",
+        "overlay"
+      ],
+      "description": "Cyan glow overlay for striped power-up.",
+      "usage": [
+        "glow-effect",
+        "overlay"
+      ],
+      "size": 10546,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_08.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_08.png"
+    },
+    {
+      "file": "asset_09.png",
+      "category": "effect",
+      "tags": [
+        "glow",
+        "sparkle",
+        "red",
+        "overlay"
+      ],
+      "description": "Red glow overlay for wrapped power-up.",
+      "usage": [
+        "glow-effect",
+        "overlay"
+      ],
+      "size": 14392,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_09.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_09.png"
+    },
+    {
+      "file": "asset_10.png",
+      "category": "background",
+      "tags": [
+        "main-background",
+        "candy-world",
+        "scenic",
+        "pastel",
+        "primary-bg",
+        "full-size",
+        "candy-crush-like"
+      ],
+      "description": "MAIN BACKGROUND: Candy-world scenic backdrop with pastel sugar hills, whipped-cream clouds, and distant candy props — 2048x2048 to match match/asset_08 primary bg.",
+      "usage": [
+        "main-background",
+        "scene",
+        "end-screen-background"
+      ],
+      "size": 3301186,
+      "dimensions": "2048x2048",
+      "format": "png",
+      "path": "./match-candy/asset_10.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_10.png"
+    },
+    {
+      "file": "asset_11.png",
+      "category": "ui",
+      "tags": [
+        "collection-box",
+        "candy-box",
+        "shelf",
+        "header",
+        "pink",
+        "frosting",
+        "cream",
+        "wide",
+        "bear-theme",
+        "collect-stool"
+      ],
+      "description": "COLLECTION BOX: Soft pink frosting candy tray matching the candy-kingdom backdrop — cream whipped rim, candy-cane bows, three round wells for lemon/heart/chocolate. Mint-teal gummy bear head + paw accents only.",
+      "usage": [
+        "collection-shelf",
+        "collection-box",
+        "header-bar",
+        "hud"
+      ],
+      "size": 599901,
+      "dimensions": "1170x446",
+      "format": "png",
+      "path": "./match-candy/asset_11.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_11.png"
+    },
+    {
+      "file": "asset_12.png",
+      "category": "special",
+      "tags": [
+        "special-object",
+        "collect-to-bottom",
+        "objective",
+        "chocolate",
+        "bar",
+        "target"
+      ],
+      "description": "Chocolate bar objective icon for collection goals.",
+      "usage": [
+        "objective-icon",
+        "collectible"
+      ],
+      "size": 19719,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_12.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_12.png"
+    },
+    {
+      "file": "asset_13.png",
+      "category": "ui",
+      "tags": [
+        "panel",
+        "end-screen",
+        "rounded",
+        "candy"
+      ],
+      "description": "Rounded candy-style end-screen panel for win/lose overlay.",
+      "usage": [
+        "end-screen-panel",
+        "dialog-background"
+      ],
+      "size": 923864,
+      "dimensions": "1024x1536",
+      "format": "png",
+      "path": "./match-candy/asset_13.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_13.png"
+    },
+    {
+      "file": "asset_14.png",
+      "category": "ui",
+      "tags": [
+        "cta",
+        "button",
+        "wide",
+        "pink",
+        "candy"
+      ],
+      "description": "Wide glossy candy CTA button with empty center for text.",
+      "usage": [
+        "cta-button",
+        "action-banner"
+      ],
+      "size": 375739,
+      "dimensions": "1536x1024",
+      "format": "png",
+      "path": "./match-candy/asset_14.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_14.png"
+    },
+    {
+      "file": "asset_15.png",
+      "category": "ui",
+      "tags": [
+        "bubbly",
+        "large",
+        "star",
+        "sweet-label",
+        "text",
+        "victory",
+        "win"
+      ],
+      "description": "Candy Crush-style golden star win badge with bubbly yellow main text \"Sweet!\" only. Clean RGBA.",
+      "usage": [
+        "win-display",
+        "end-screen"
+      ],
+      "size": 53686,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_15.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_15.png"
+    },
+    {
+      "file": "asset_16.png",
+      "category": "ui",
+      "tags": [
+        "broken-candy",
+        "bubbly",
+        "failed-label",
+        "failure",
+        "large",
+        "lose",
+        "text"
+      ],
+      "description": "Candy Crush-style broken candy lose badge with bubbly yellow main text \"Failed!\" only. Clean RGBA.",
+      "usage": [
+        "lose-display",
+        "end-screen"
+      ],
+      "size": 52969,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_16.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_16.png"
+    },
+    {
+      "file": "asset_17.png",
+      "category": "ui",
+      "tags": [
+        "sound",
+        "mute",
+        "icon",
+        "small"
+      ],
+      "description": "Mute sound icon in candy UI style.",
+      "usage": [
+        "sound-toggle",
+        "mute-button"
+      ],
+      "size": 19517,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_17.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_17.png"
+    },
+    {
+      "file": "asset_18.png",
+      "category": "ui",
+      "tags": [
+        "sound",
+        "unmute",
+        "icon",
+        "small"
+      ],
+      "description": "Unmute sound icon in candy UI style.",
+      "usage": [
+        "sound-toggle",
+        "unmute-button"
+      ],
+      "size": 10769,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_18.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_18.png"
+    },
+    {
+      "file": "asset_19.png",
+      "category": "ui",
+      "tags": [
+        "moves",
+        "counter",
+        "circle",
+        "arrows"
+      ],
+      "description": "Circular moves-counter badge with looping arrows.",
+      "usage": [
+        "moves-counter",
+        "hud"
+      ],
+      "size": 28266,
+      "dimensions": "200x200",
+      "format": "png",
+      "path": "./match-candy/asset_19.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_19.png"
+    },
+    {
+      "file": "asset_20.png",
+      "category": "background",
+      "tags": [
+        "board-background",
+        "primary-board-bg",
+        "panel",
+        "portrait",
+        "vertical",
+        "blue",
+        "jelly",
+        "glossy",
+        "candy-crush-like",
+        "grid-6x8",
+        "large",
+        "programmatic"
+      ],
+      "description": "BOARD BACKGROUND: Candy Crush-inspired jelly-blue candy tray with soft 6x8 recessed cell wells, candy rim, and specular gloss. High-res 1686x2262 (3x match/asset_21 aspect) with soft antialiased edges. True RGBA outside panel.",
+      "usage": [
+        "board-background",
+        "game-board-surface",
+        "primary-board-bg"
+      ],
+      "size": 829655,
+      "dimensions": "1686x2262",
+      "format": "png",
+      "path": "./match-candy/asset_20.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_20.png"
+    },
+    {
+      "file": "asset_21.png",
+      "category": "character",
+      "tags": [
+        "bear",
+        "candy",
+        "mascot",
+        "cute",
+        "character",
+        "protagonist",
+        "medium"
+      ],
+      "description": "CANDY BEAR MASCOT: A cute candy-themed bear character — the game's protagonist and mascot. Place next to the board as the friendly character guide.",
+      "usage": [
+        "character-portrait",
+        "mascot",
+        "guide-character"
+      ],
+      "size": 35544,
+      "dimensions": "135x200",
+      "format": "png",
+      "path": "./match-candy/asset_21.png",
+      "url": "http://localhost:4000/uploads/playable-assets/match-candy/asset_21.png"
+    }
+  ],
+  "baseUrl": "http://localhost:4000/uploads/playable-assets/match-candy",
+  "game": "match-candy",
+  "gameplaySpec": "gameplay-spec.md",
+  "assetPromptSpec": "asset-prompts.md"
+}

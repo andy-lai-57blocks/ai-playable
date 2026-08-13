@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1170" height="260" viewBox="0 0 1170 260">
+  <defs>
+    <linearGradient id="topFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF6FB"/>
+      <stop offset="1" stop-color="#FFD6EA"/>
+    </linearGradient>
+    <linearGradient id="frontFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFA9D4"/>
+      <stop offset="1" stop-color="#EF6FB0"/>
+    </linearGradient>
+    <linearGradient id="shadow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8A2D5E" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#8A2D5E" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="frontClip">
+      <rect x="30" y="120" width="1110" height="116" rx="30"/>
+    </clipPath>
+  </defs>
+
+  <!-- soft drop shadow -->
+  <ellipse cx="585" cy="250" rx="555" ry="10" fill="url(#shadow)"/>
+
+  <!-- front face -->
+  <rect x="30" y="120" width="1110" height="116" rx="30" fill="url(#frontFace)"/>
+
+  <!-- candy-cane stripes on front face -->
+  <g clip-path="url(#frontClip)">
+    <g transform="rotate(-14 585 178)">
+      <rect x="-250" y="120" width="1700" height="46" fill="#ffffff" opacity="0.85"/>
+      <rect x="-250" y="212" width="1700" height="46" fill="#ffffff" opacity="0.85"/>
+    </g>
+    <!-- soft vertical shading on front -->
+    <rect x="30" y="120" width="1110" height="116" fill="#ffffff" opacity="0.06"/>
+    <rect x="30" y="210" width="1110" height="26" fill="#D94E96" opacity="0.22"/>
+  </g>
+
+  <!-- sprinkles on front face -->
+  <g opacity="0.95">
+    <rect x="90"  y="168" width="34" height="12" rx="6" fill="#6FE0BF" transform="rotate(-18 107 174)"/>
+    <rect x="170" y="196" width="30" height="11" rx="5.5" fill="#6FC4FF" transform="rotate(14 185 201)"/>
+    <rect x="265" y="160" width="34" height="12" rx="6" fill="#FFE07A" transform="rotate(8 282 166)"/>
+    <rect x="355" y="200" width="30" height="11" rx="5.5" fill="#FF8A5C" transform="rotate(-24 370 205)"/>
+    <rect x="450" y="168" width="34" height="12" rx="6" fill="#6FC4FF" transform="rotate(18 467 174)"/>
+    <rect x="545" y="196" width="30" height="11" rx="5.5" fill="#6FE0BF" transform="rotate(-8 560 201)"/>
+    <rect x="640" y="160" width="34" height="12" rx="6" fill="#FF8A5C" transform="rotate(24 657 166)"/>
+    <rect x="735" y="200" width="30" height="11" rx="5.5" fill="#FFE07A" transform="rotate(-16 750 205)"/>
+    <rect x="830" y="168" width="34" height="12" rx="6" fill="#6FC4FF" transform="rotate(-20 847 174)"/>
+    <rect x="925" y="196" width="30" height="11" rx="5.5" fill="#FF8A5C" transform="rotate(10 940 201)"/>
+    <rect x="1020" y="162" width="34" height="12" rx="6" fill="#6FE0BF" transform="rotate(16 1037 168)"/>
+  </g>
+
+  <!-- top face (ledge surface) -->
+  <rect x="20" y="62" width="1130" height="88" rx="44" fill="url(#topFace)"/>
+
+  <!-- glossy highlight on top -->
+  <rect x="46" y="70" width="1078" height="28" rx="14" fill="#ffffff" opacity="0.6"/>
+  <ellipse cx="585" cy="86" rx="360" ry="12" fill="#ffffff" opacity="0.5"/>
+
+  <!-- front edge seam highlight -->
+  <rect x="30" y="116" width="1110" height="7" rx="3.5" fill="#FFE3F2" opacity="0.9"/>
+  <rect x="30" y="120" width="1110" height="3" rx="1.5" fill="#FF8FBE" opacity="0.55"/>
+
+  <!-- side candy dots -->
+  <circle cx="62" cy="150" r="16" fill="#FF7FB5"/>
+  <circle cx="62" cy="150" r="9" fill="#ffffff" opacity="0.75"/>
+  <circle cx="1108" cy="150" r="16" fill="#FF7FB5"/>
+  <circle cx="1108" cy="150" r="9" fill="#ffffff" opacity="0.75"/>
+</svg>

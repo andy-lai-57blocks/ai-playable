@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:100%;height:100%;overflow:hidden;touch-action:manipulation;-webkit-tap-highlight-color:transparent;font-family:system-ui,-apple-system,sans-serif;}
+  body{
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg, #1a1a2e, #16213e);
+    color:#ffffff;
+    -webkit-user-select:none;user-select:none;
+  }
+  #playable-root{
+    position:relative;
+    width:100%;height:100%;
+    overflow:hidden;
+    background:linear-gradient(135deg, #1a1a2e, #16213e);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000}
+#game-container{width:100%;height:100%}
+</style>
+</head>
+<body>
+<div id="playable-root">
+<div id="game-container"></div>
+</div>
+<script>
+// ── Phaser Match-3 ──
+const GEM_TYPES = ["💎","🔮","💠","⚡","🌟","🔷"];
+const GEM_IMAGES = ["http://localhost:3002/playable-assets/match-majiang/asset_00.png","http://localhost:3002/playable-assets/match-majiang/asset_01.png","http://localhost:3002/playable-assets/match-majiang/asset_02.png","http://localhost:3002/playable-assets/match-majiang/asset_03.png","http://localhost:3002/playable-assets/match-majiang/asset_04.png","http://localhost:3002/playable-assets/match-majiang/asset_05.png","http://localhost:3002/playable-assets/match-majiang/asset_06.png","http://localhost:3002/playable-assets/match-majiang/asset_07.png"];
+const GEM_COUNT = 8;
+const COLS = 6, ROWS = 8;
+const TARGET = 300;
+const TIME_LIMIT = 180;
+const MAIN_BG = "http://localhost:3002/playable-assets/match-majiang/asset_32.png";
+const BOARD_BG = "http://localhost:3002/playable-assets/match-majiang/asset_22.png";
+const CHAR_URL = "http://localhost:3002/playable-assets/match-majiang/asset_21.png";
+const CAT_SHELF = "";
+const PARTICLE_COLORS = [16766720,16755200,16747520,16777215];
+const ACCENT_COLOR = "#ffd700";
+const STROKE_COLOR = "#ffffff";
+const HEADLINE = "Play Now!";
+const CTA_TEXT = "Install Now";
+const WIN_ICON = "http://localhost:3002/playable-assets/match-majiang/asset_18.png";
+const LOSE_ICON = "http://localhost:3002/playable-assets/match-majiang/asset_27.png";
+const SPECIAL_IMAGES = ["http://localhost:3002/playable-assets/match-majiang/asset_33.png","http://localhost:3002/playable-assets/match-majiang/asset_34.png","http://localhost:3002/playable-assets/match-majiang/asset_35.png"];
+const SPECIAL_GLOWS = {};
+const STOOL_URL = "http://localhost:3002/playable-assets/match-majiang/asset_36.png";
+const STOOL_LIFT = 66;
+const STOOL_LAND_OFFSET = -30;
+const CHAR_Y_OFFSET = 0;
+const BOARD_Y_OFFSET = 0;
+const COLLECT_MODE = true;
+
+// ── Preload all images ──
+const IMG_LIST = [
+  ...GEM_IMAGES.map((url,i) => ({key:'gem'+i, url})),
+  ...SPECIAL_IMAGES.map((url,i) => ({key:'special'+i, url})),
+  {key:'mainBg', url:MAIN_BG},
+  {key:'boardBg', url:BOARD_BG},
+  {key:'char', url:CHAR_URL},
+  {key:'catShelf', url:CAT_SHELF},
+  {key:'stool', url:STOOL_URL},
+  {key:'winIcon', url:WIN_ICON},
+  {key:'loseIcon', url:LOSE_ICON},
+].filter(e => e.url);
+
+let imgsLoaded = 0;
+const loadedImgs = {};
+IMG_LIST.forEach(({key, url}) => {
+  const img = new Image();
+  img.onload = img.onerror = () => {
+    loadedImgs[key] = img;
+    if (++imgsLoaded === IMG_LIST.length) startGame();
+  };
+  img.src = url;
+});
+if (IMG_LIST.length === 0) startGame();
+
+// Glow URL for a special object (match by asset name in URL)
+function glowFor(specialUrl) {
+  const m = specialUrl.match(/asset_\d+/);
+  if (m && SPECIAL_GLOWS[m[0]]) return SPECIAL_GLOWS[m[0]];
+  return '';
+}
+
+function startGame() {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js';
+  script.onload = () => {
+    const container = document.getElementById('game-container');
+    const W = container.clientWidth, H = container.clientHeight;
+
+    class MatchScene extends Phaser.Scene {
+      constructor() { super('match'); }
+
+      preload() {
+        for (const key in loadedImgs) {
+          if (!this.textures.exists(key) && loadedImgs[key].complete && loadedImgs[key].naturalWidth > 0) {
+            this.textures.addImage(key, loadedImgs[key]);
+          }
+        }
+      }
+
+      create() {
+        const S = this;
+        const vw = S.scale.width, vh = S.scale.height;
+
+        // ── Background (scale-to-fill) ──
+        if (S.textures.exists('mainBg')) {
+          const tex = S.textures.get('mainBg').source[0];
+          const s = Math.max(vw / tex.width, vh / tex.height);
+          S.add.image(vw/2, vh/2, 'mainBg').setDisplaySize(tex.width*s, tex.height*s);
+        }
+        S.add.rectangle(vw/2, vh/2, vw, vh, 0x000000, 0.3).setDepth(-1);
+
+        // ── Particle emitter for match burst ──
+        const pt = S.textures.createCanvas('particle', 16, 16);
+        const pctx = pt.getContext();
+        const grad = pctx.createRadialGradient(8, 8, 0, 8, 8, 8);
+        grad.addColorStop(0, '#fff');
+        grad.addColorStop(1, 'rgba(255,255,255,0)');
+        pctx.fillStyle = grad;
+        pctx.fillRect(0, 0, 16, 16);
+        pt.refresh();
+
+        const emitter = S.add.particles(0, 0, 'particle', {
+          speed: { min: 60, max: 220 },
+          angle: { min: 0, max: 360 },
+          scale: { start: 0.6, end: 0 },
+          alpha: { start: 1, end: 0 },
+          lifespan: { min: 300, max: 600 },
+          gravityY: 250,
+          rotate: { min: 0, max: 360 },
+          tint: PARTICLE_COLORS,
+          blendMode: 'ADD',
+          emitting: false,
+        }).setDepth(10);
+
+        function burstParticles(x, y) {
+          emitter.explode(16, x, y);
+        }
+
+        // ── Board sizing ──
+        // Collect mode reserves bottom space for the stool
+        const vhFactor = COLLECT_MODE ? 0.50 : 0.58;
+        const gemSize = Math.floor(Math.min(vw * 0.82 / COLS, vh * vhFactor / ROWS) * 1.15);
+        const boardW = gemSize * COLS;
+        const boardH = gemSize * ROWS;
+        const boardY = (COLLECT_MODE ? vh * 0.16 : vh * 0.234) + BOARD_Y_OFFSET;
+        // Shelf sized to the board, lifted slightly above the floor
+        const shelfLift = 96;
+        const shelfH = S.textures.exists('catShelf') ? boardH : 0;
+        const shelfW = shelfH ? shelfH * (440 / 943) : 0;
+        const shelfGap = gemSize * 0.5;
+        const totalW = boardW + shelfGap + shelfW;
+        const boardX = (vw - totalW) / 2;
+
+        // ── Board background panel ──
+        if (S.textures.exists('boardBg')) {
+          const panelH = boardH * 1.06;
+          const panelW = panelH * (562 / 754);
+          S.add.image(boardX + boardW/2, boardY + boardH/2, 'boardBg')
+            .setDisplaySize(panelW, panelH).setDepth(0);
+        }
+
+        // ── Character: cat-on-shelf OR standalone mascot ──
+        if (S.textures.exists('char')) {
+          if (S.textures.exists('catShelf')) {
+            const shelfX = boardX + boardW + shelfGap + shelfW / 2;
+            const shelfTop = vh - shelfLift - shelfH;
+            S.add.image(shelfX, shelfTop + shelfH / 2, 'catShelf')
+              .setDisplaySize(shelfW, shelfH).setDepth(4);
+            const catH = boardH * 0.28;
+            const catW = catH * (243 / 290);
+            S.add.image(shelfX, shelfTop + 25 + CHAR_Y_OFFSET, 'char')
+              .setDisplaySize(catW, catH).setDepth(6);
+          } else {
+            const charH = boardH * 0.45;
+            const tex = S.textures.get('char').source[0];
+            const charW = charH * (tex.width / tex.height);
+            S.add.image(boardX + boardW + shelfGap + charW / 2, boardY + boardH * 0.65 + CHAR_Y_OFFSET, 'char')
+              .setDisplaySize(charW, charH).setDepth(6);
+          }
+        }
+
+        // ═══════════════════════════════════════
+        //  Game state
+        // ═══════════════════════════════════════
+
+        const SWAP_SPEED = 160;
+        const FALL_SPEED = 100;
+        const DESTROY_SPEED = 200;
+
+        let canPick = true;
+        let selectedGem = null;
+        let gameArray = [];   // { gemColor, gemSprite, isEmpty, isSpecial, specialIdx }
+        let poolArray = [];   // regular gem sprite pool
+        let collected = [false, false, false];
+        let collectedCount = 0;
+        let gameOver = false;
+        let timeLeft = TIME_LIMIT;
+
+        // ── Collection stool (collect mode) ──
+        let stoolSlots = []; // sprites on stool
+        let hudSlots = [];   // mini icons top-left
+        if (COLLECT_MODE && S.textures.exists('stool')) {
+          const stoolH = Math.min(120, vh * 0.13);
+          const stoolTex = S.textures.get('stool').source[0];
+          const stoolW = stoolH * (stoolTex.width / stoolTex.height);
+          const stoolY = vh - stoolH / 2 - STOOL_LIFT;
+          S.add.image(vw / 2, stoolY, 'stool')
+            .setDisplaySize(stoolW, stoolH).setDepth(5);
+          // Slot anchors on stool (invisible — only target positions for collect tween)
+          const slotSize = stoolH * 0.62;
+          for (let i = 0; i < 3; i++) {
+            const sx = vw / 2 + (i - 1) * (stoolW * 0.26);
+            const slot = S.add.image(sx, stoolY - slotSize * 0.28, 'special' + i)
+              .setDisplaySize(slotSize, slotSize)
+              .setAlpha(0).setDepth(6);
+            stoolSlots.push(slot);
+          }
+          // Mini HUD icons top-left
+          const hudSize = 22;
+          for (let i = 0; i < 3; i++) {
+            const h = S.add.image(16 + hudSize/2 + i * (hudSize + 6), 16 + hudSize/2, 'special' + i)
+              .setDisplaySize(hudSize, hudSize)
+              .setAlpha(0.25).setDepth(10);
+            hudSlots.push(h);
+          }
+        }
+
+        // ── Sprites ──
+        function createGemSprite(x, y) {
+          let sprite;
+          if (GEM_IMAGES.length > 0 && S.textures.exists('gem0')) {
+            sprite = S.add.image(x, y, 'gem0');
+            sprite.setDisplaySize(gemSize * 0.9, gemSize * 0.9);
+          } else {
+            sprite = S.add.text(x, y, GEM_TYPES[0], {
+              fontSize: Math.floor(gemSize * 0.5) + 'px',
+              fontFamily: '"Apple Color Emoji","Segoe UI Emoji",sans-serif',
+            }).setOrigin(0.5);
+          }
+          sprite.setDepth(1);
+          return sprite;
+        }
+
+        function setGemFrame(sprite, colorIndex) {
+          if (GEM_IMAGES.length > 0 && S.textures.exists('gem' + colorIndex)) {
+            sprite.setTexture('gem' + colorIndex);
+            sprite.setDisplaySize(gemSize * 0.9, gemSize * 0.9);
+          } else if (sprite.type === 'Text') {
+            sprite.setText(GEM_TYPES[colorIndex] || '?');
+          }
+        }
+
+        // Special object: container with special image + optional glow overlay
+        function createSpecialSprite(x, y, idx) {
+          const size = gemSize * 0.95;
+          const img = S.add.image(0, 0, 'special' + idx)
+            .setDisplaySize(size, size);
+          const parts = [img];
+          const glowUrl = glowFor(SPECIAL_IMAGES[idx] || '');
+          const glowKey = 'glow' + idx;
+          if (glowUrl && !S.textures.exists(glowKey)) {
+            const gi = loadedImgs['glow' + idx];
+            if (gi && gi.complete && gi.naturalWidth > 0) S.textures.addImage(glowKey, gi);
+          }
+          if (glowUrl && S.textures.exists(glowKey)) {
+            parts.push(S.add.image(0, 0, glowKey).setDisplaySize(size * 1.25, size * 1.25));
+          }
+          const cont = S.add.container(x, y, parts);
+          cont.setDepth(2);
+          return cont;
+        }
+
+        // Preload glow textures natively
+        if (COLLECT_MODE) {
+          SPECIAL_IMAGES.forEach((url, i) => {
+            const g = glowFor(url);
+            if (g) {
+              const gi = new Image();
+              gi.onload = () => { loadedImgs['glow' + i] = gi; };
+              gi.src = g;
+              loadedImgs['glow' + i] = gi;
+            }
+          });
+        }
+
+        // ── Draw initial field ──
+        function drawField() {
+          for (let r = 0; r < ROWS; r++) {
+            gameArray[r] = [];
+            for (let c = 0; c < COLS; c++) {
+              const x = boardX + c * gemSize + gemSize / 2;
+              const y = boardY + r * gemSize + gemSize / 2;
+              let gem = createGemSprite(x, y);
+              do {
+                const color = Phaser.Math.Between(0, GEM_COUNT - 1);
+                setGemFrame(gem, color);
+                gameArray[r][c] = { gemColor: color, gemSprite: gem, isEmpty: false, isSpecial: false };
+              } while (isMatch(r, c));
+            }
+          }
+          // Place 3 special objects at distinct columns, rows 0..1
+          if (COLLECT_MODE) {
+            const colsShuffled = Phaser.Utils.Array.Shuffle([0,1,2,3,4,5]);
+            for (let i = 0; i < 3; i++) {
+              const c = colsShuffled[i];
+              const r = Phaser.Math.Between(0, 1);
+              const x = boardX + c * gemSize + gemSize / 2;
+              const y = boardY + r * gemSize + gemSize / 2;
+              const old = gameArray[r][c];
+              if (old && old.gemSprite) old.gemSprite.destroy();
+              const cont = createSpecialSprite(x, y, i);
+              gameArray[r][c] = { gemColor: -2 - i, gemSprite: cont, isEmpty: false, isSpecial: true, specialIdx: i };
+            }
+          }
+        }
+
+        // ── Match detection (specials never match) ──
+        function isMatch(row, col) {
+          return isHorizontalMatch(row, col) || isVerticalMatch(row, col);
+        }
+
+        function isHorizontalMatch(row, col) {
+          const v = gemAt(row, col).gemColor;
+          if (v < 0) return false;
+          return v === gemAt(row, col - 1).gemColor && v === gemAt(row, col - 2).gemColor;
+        }
+
+        function isVerticalMatch(row, col) {
+          const v = gemAt(row, col).gemColor;
+          if (v < 0) return false;
+          return v === gemAt(row - 1, col).gemColor && v === gemAt(row - 2, col).gemColor;
+        }
+
+        function gemAt(row, col) {
+          if (row < 0 || row >= ROWS || col < 0 || col >= COLS) return { gemColor: -1 };
+          return gameArray[row][col];
+        }
+
+        function matchInBoard() {
+          for (let r = 0; r < ROWS; r++)
+            for (let c = 0; c < COLS; c++)
+              if (isMatch(r, c)) return true;
+          return false;
+        }
+
+        // ── Selection (tap + drag/swipe) ──
+        function getGemRow(gem) { return Math.floor((gem.gemSprite.y - boardY) / gemSize); }
+        function getGemCol(gem) { return Math.floor((gem.gemSprite.x - boardX) / gemSize); }
+        function areNext(gem1, gem2) {
+          return Math.abs(getGemRow(gem1) - getGemRow(gem2)) + Math.abs(getGemCol(gem1) - getGemCol(gem2)) === 1;
+        }
+
+        let dragRow = -1, dragCol = -1;
+        S.input.on('pointerdown', (pointer) => {
+          if (!canPick || gameOver) return;
+          const col = Math.floor((pointer.x - boardX) / gemSize);
+          const row = Math.floor((pointer.y - boardY) / gemSize);
+          const pickedGem = gemAt(row, col);
+          if (pickedGem.gemColor === -1 || pickedGem.isEmpty || pickedGem.isSpecial) return;
+          dragRow = row; dragCol = col;
+
+          if (selectedGem === null) {
+            selectedGem = pickedGem;
+          } else if (getGemRow(selectedGem) === row && getGemCol(selectedGem) === col) {
+            selectedGem = null;
+          } else if (areNext(pickedGem, selectedGem)) {
+            swapGems(selectedGem, pickedGem, true);
+          } else {
+            selectedGem = pickedGem;
+          }
+        });
+
+        S.input.on('pointermove', (pointer) => {
+          if (!canPick || gameOver || selectedGem === null) return;
+          if (!pointer.isDown) return;
+          const dx = pointer.x - (boardX + dragCol * gemSize + gemSize / 2);
+          const dy = pointer.y - (boardY + dragRow * gemSize + gemSize / 2);
+          const threshold = gemSize * 0.35;
+          if (Math.abs(dx) < threshold && Math.abs(dy) < threshold) return;
+
+          let dr = 0, dc = 0;
+          if (Math.abs(dx) > Math.abs(dy)) { dc = dx > 0 ? 1 : -1; }
+          else { dr = dy > 0 ? 1 : -1; }
+
+          const nr = dragRow + dr, nc = dragCol + dc;
+          const neighbor = gemAt(nr, nc);
+          if (neighbor.gemColor !== -1 && !neighbor.isEmpty && !neighbor.isSpecial) {
+            swapGems(selectedGem, neighbor, true);
+          }
+        });
+
+        S.input.on('pointerup', () => { dragRow = -1; dragCol = -1; });
+
+        // ── Swap ──
+        let swappingGems = 0;
+        function swapGems(gem1, gem2, swapBack) {
+          swappingGems = 2;
+          canPick = false;
+          const fc = gem1.gemColor, fs = gem1.gemSprite;
+          const tc = gem2.gemColor, ts = gem2.gemSprite;
+          const r1 = getGemRow(gem1), c1 = getGemCol(gem1);
+          const r2 = getGemRow(gem2), c2 = getGemCol(gem2);
+
+          gameArray[r1][c1].gemColor = tc;
+          gameArray[r1][c1].gemSprite = ts;
+          gameArray[r2][c2].gemColor = fc;
+          gameArray[r2][c2].gemSprite = fs;
+
+          tweenGem(gem1, swapBack);
+          tweenGem(gem2, swapBack);
+        }
+
+        function tweenGem(gem, swapBack) {
+          const row = getGemRow(gem);
+          const col = getGemCol(gem);
+          S.tweens.add({
+            targets: gameArray[row][col].gemSprite,
+            x: boardX + col * gemSize + gemSize / 2,
+            y: boardY + row * gemSize + gemSize / 2,
+            duration: SWAP_SPEED,
+            onComplete: () => {
+              swappingGems--;
+              if (swappingGems === 0) {
+                if (!matchInBoard() && swapBack) {
+                  swapGems(
+                    gameArray[getGemRow(gem)][getGemCol(gem)],
+                    gem, false
+                  );
+                } else if (matchInBoard()) {
+                  __evt('SWAP->HM');
+                  handleMatches();
+                } else {
+                  __evt('SWAP-END');
+                  canPick = true;
+                  selectedGem = null;
+                }
+              }
+            }
+          });
+        }
+
+        // ── Match handling ──
+        let resolving = false; // re-entrancy guard for the resolve cycle
+        function handleMatches() {
+          __evt('HM' + (resolving ? '(SKIP)' : ''));
+          if (resolving) return;
+          resolving = true;
+          const removeMap = [];
+          for (let r = 0; r < ROWS; r++) {
+            removeMap[r] = [];
+            for (let c = 0; c < COLS; c++) removeMap[r].push(0);
+          }
+
+          for (let r = 0; r < ROWS; r++) {
+            let streak = 1, curColor = -99, start = 0;
+            for (let c = 0; c < COLS; c++) {
+              const color = gameArray[r][c].gemColor;
+              const matchable = color >= 0;
+              if (matchable && color === curColor) { streak++; }
+              if (!matchable || color !== curColor || c === COLS - 1) {
+                if (streak >= 3) {
+                  for (let k = 0; k < streak; k++) removeMap[r][start + k]++;
+                }
+                start = c; streak = matchable ? 1 : 1; curColor = color;
+              }
+            }
+          }
+
+          for (let c = 0; c < COLS; c++) {
+            let streak = 1, curColor = -99, start = 0;
+            for (let r = 0; r < ROWS; r++) {
+              const color = gameArray[r][c].gemColor;
+              const matchable = color >= 0;
+              if (matchable && color === curColor) { streak++; }
+              if (!matchable || color !== curColor || r === ROWS - 1) {
+                if (streak >= 3) {
+                  for (let k = 0; k < streak; k++) removeMap[start + k][c]++;
+                }
+                start = r; streak = 1; curColor = color;
+              }
+            }
+          }
+
+          destroyGems(removeMap);
+        }
+
+        function destroyGems(removeMap) {
+          let destroyed = 0;
+          for (let r = 0; r < ROWS; r++) {
+            for (let c = 0; c < COLS; c++) {
+              if (removeMap[r][c] > 0) {
+                const spr = gameArray[r][c] && gameArray[r][c].gemSprite;
+                if (!spr || spr._pooled) {
+                  // Already handled — just normalize the cell
+                  if (gameArray[r][c]) { gameArray[r][c].isEmpty = true; gameArray[r][c].gemColor = -1; }
+                  continue;
+                }
+                destroyed++;
+                const gx = boardX + c * gemSize + gemSize / 2;
+                const gy = boardY + r * gemSize + gemSize / 2;
+                burstParticles(gx, gy);
+                S.tweens.add({
+                  targets: spr,
+                  alpha: 0, scaleX: 0.3, scaleY: 0.3,
+                  duration: DESTROY_SPEED,
+                  onComplete: () => {
+                    destroyed--;
+                    if (!spr._pooled) {
+                      spr.visible = false;
+                      spr.setScale(1);
+                      spr.setAlpha(1);
+                      spr._pooled = true;
+                      poolArray.push(spr);
+                    }
+                    if (destroyed === 0) {
+                      makeGemsFall();
+                      replenishField();
+                    }
+                  }
+                });
+                gameArray[r][c].isEmpty = true;
+                gameArray[r][c].gemColor = -1;
+              }
+            }
+          }
+          __evt('DG:' + destroyed);
+          if (destroyed === 0) {
+            // Nothing to clear — resume the chain instead of freezing
+            makeGemsFall();
+            replenishField();
+          }
+        }
+
+        // ── Gravity ──
+        function makeGemsFall() {
+          __evt('FALL');
+          for (let r = ROWS - 2; r >= 0; r--) {
+            for (let c = 0; c < COLS; c++) {
+              if (!gameArray[r][c].isEmpty) {
+                const fallTiles = holesBelow(r, c);
+                if (fallTiles > 0) {
+                  const targetY = gameArray[r][c].gemSprite.y + fallTiles * gemSize;
+                  S.tweens.add({
+                    targets: gameArray[r][c].gemSprite,
+                    y: targetY,
+                    duration: FALL_SPEED * fallTiles
+                  });
+                  gameArray[r + fallTiles][c] = gameArray[r][c];
+                  gameArray[r][c] = { gemColor: -1, gemSprite: null, isEmpty: true };
+                }
+              }
+            }
+          }
+        }
+
+        function holesBelow(row, col) {
+          let result = 0;
+          for (let r = row + 1; r < ROWS; r++) {
+            if (gameArray[r][col].isEmpty) result++;
+          }
+          return result;
+        }
+
+        // ── Refill (regular gems only) ──
+        function replenishField() {
+          __evt('REPLENISH');
+          let replenished = 0;
+          for (let c = 0; c < COLS; c++) {
+            const emptySpots = holesInCol(c);
+            if (emptySpots > 0) {
+              for (let r = 0; r < emptySpots; r++) {
+                replenished++;
+                const color = Phaser.Math.Between(0, GEM_COUNT - 1);
+                const startY = boardY + gemSize / 2;
+                const sprite = poolArray.pop();
+                if (sprite) {
+                  S.tweens.killTweensOf(sprite);
+                  sprite._pooled = false;
+                  sprite.visible = true;
+                  sprite.setScale(1);
+                  sprite.setAlpha(0);
+                  sprite.setDepth(1);
+                  sprite.x = boardX + c * gemSize + gemSize / 2;
+                  sprite.y = startY;
+                  setGemFrame(sprite, color);
+                }
+                gameArray[r][c] = {
+                  gemColor: color,
+                  gemSprite: sprite || createGemSprite(boardX + c * gemSize + gemSize / 2, startY),
+                  isEmpty: false, isSpecial: false
+                };
+                if (!sprite) gameArray[r][c].gemSprite.setAlpha(0);
+                S.tweens.add({
+                  targets: gameArray[r][c].gemSprite,
+                  y: boardY + r * gemSize + gemSize / 2,
+                  alpha: 1,
+                  duration: FALL_SPEED * emptySpots,
+                  onComplete: () => {
+                    replenished--;
+                    if (replenished === 0) checkCollects();
+                  }
+                });
+              }
+            }
+          }
+          if (replenished === 0) checkCollects();
+        }
+
+        function holesInCol(col) {
+          let result = 0;
+          for (let r = 0; r < ROWS; r++) {
+            if (gameArray[r][col].isEmpty) result++;
+          }
+          return result;
+        }
+
+        // ── Collect specials that reached the bottom row ──
+        function checkCollects() {
+          __evt('CHECK');
+          if (gameOver) return;
+          if (!COLLECT_MODE) {
+            if (matchInBoard()) {
+              resolving = false;
+              S.time.delayedCall(150, () => handleMatches());
+            } else {
+              resolving = false;
+              canPick = true;
+              selectedGem = null;
+            }
+            if (score >= TARGET) endGame('win');
+            return;
+          }
+
+          let found = [];
+          for (let c = 0; c < COLS; c++) {
+            const cell = gameArray[ROWS - 1][c];
+            if (cell && cell.isSpecial && !cell.isEmpty) found.push({ cell, c });
+          }
+
+          if (found.length === 0) {
+            if (matchInBoard()) {
+              resolving = false;
+              S.time.delayedCall(150, () => handleMatches());
+            } else {
+              resolving = false;
+              canPick = true;
+              selectedGem = null;
+            }
+            return;
+          }
+
+          // Animate each found special to the stool
+          canPick = false;
+          let animating = found.length;
+          found.forEach(({ cell, c }) => {
+            const idx = cell.specialIdx;
+            const slot = stoolSlots[idx];
+            const sprite = cell.gemSprite;
+            gameArray[ROWS - 1][c] = { gemColor: -1, gemSprite: null, isEmpty: true };
+            if (slot) {
+              S.tweens.add({
+                targets: sprite,
+                x: slot.x, y: slot.y + STOOL_LAND_OFFSET,
+                scaleX: 0.4, scaleY: 0.4,
+                duration: 450,
+                ease: 'Quad.easeIn',
+                onComplete: () => {
+                  // Rest the collected object on top of the stool (30px above slot)
+                  const slotSize = slot.displayWidth;
+                  const texW = sprite.texture ? sprite.texture.source[0].width : slotSize;
+                  sprite.setDepth(6);
+                  sprite.setScale(1.3 * (slotSize / texW));
+                  S.tweens.add({ targets: sprite, scaleX: slotSize / texW, scaleY: slotSize / texW, duration: 200, ease: 'Back.easeOut' });
+                  slot.setAlpha(0); // ghost slot no longer needed
+                  collected[idx] = true;
+                  collectedCount++;
+                  if (hudSlots[idx]) { hudSlots[idx].setAlpha(1); }
+                  animating--;
+                  if (animating === 0) {
+                    if (collectedCount >= 3) { endGame('win'); return; }
+                    makeGemsFall();
+                    replenishField();
+                  }
+                }
+              });
+            } else {
+              sprite.destroy();
+              animating--;
+              if (animating === 0) {
+                if (collectedCount >= 3) { endGame('win'); return; }
+                makeGemsFall();
+                replenishField();
+              }
+            }
+          });
+        }
+
+        // ── UI ──
+        const uiStyle = {
+          fontSize: '18px', fontFamily: 'system-ui,sans-serif',
+          color: ACCENT_COLOR, fontStyle: 'bold',
+          stroke: STROKE_COLOR, strokeThickness: 3
+        };
+        const scoreText = COLLECT_MODE ? null : S.add.text(16, 12, '⭐ ' + 0 + ' / ' + TARGET, uiStyle)
+          .setOrigin(0, 0).setDepth(10);
+        let score = 0;
+
+        function updateUI() {
+          if (scoreText) scoreText.setText('⭐ ' + score + ' / ' + TARGET);
+        }
+
+        // ── Countdown: supersampled canvas ring (smooth edges) ──
+        const ringR = 26;
+        const ringX = vw - ringR - 18, ringY = ringR + 18;
+        const RING_SS = 4; // supersample factor for anti-aliased edges
+        const ringCv = document.createElement('canvas');
+        const ringPad = 9;
+        ringCv.width = ringCv.height = (ringR + ringPad) * 2 * RING_SS;
+        const rctx = ringCv.getContext('2d');
+        S.textures.addCanvas('timerRing', ringCv);
+        const ringC = S.add.container(ringX, ringY).setDepth(10);
+        const ringSprite = S.add.image(0, 0, 'timerRing')
+          .setDisplaySize(ringCv.width / RING_SS, ringCv.height / RING_SS);
+        const timerText = S.add.text(0, 0, '0:00', {
+          fontSize: '15px', fontFamily: 'system-ui,sans-serif',
+          color: '#ffffff', fontStyle: 'bold'
+        }).setOrigin(0.5);
+        ringC.add([ringSprite, timerText]);
+
+        function mmss(t) {
+          return Math.max(0, Math.floor(t / 60)) + ':' + String(Math.max(0, t % 60)).padStart(2, '0');
+        }
+        function drawRing(frac, urgent) {
+          const colHex = urgent ? '#ff5a5a' : String(ACCENT_COLOR);
+          const N = RING_SS, size = ringCv.width;
+          const R = ringR * N, cx = size / 2, cy = size / 2;
+          rctx.clearRect(0, 0, size, size);
+          // soft glow
+          const g = rctx.createRadialGradient(cx, cy, R * 0.55, cx, cy, R + ringPad * N);
+          g.addColorStop(0, colHex + '30');
+          g.addColorStop(1, colHex + '00');
+          rctx.fillStyle = g;
+          rctx.beginPath(); rctx.arc(cx, cy, R + ringPad * N, 0, Math.PI * 2); rctx.fill();
+          // dark disc
+          rctx.fillStyle = 'rgba(0,0,0,0.45)';
+          rctx.beginPath(); rctx.arc(cx, cy, R, 0, Math.PI * 2); rctx.fill();
+          // subtle track
+          rctx.lineWidth = 4 * N;
+          rctx.lineCap = 'round';
+          rctx.strokeStyle = 'rgba(255,255,255,0.14)';
+          rctx.beginPath(); rctx.arc(cx, cy, R - 3 * N, 0, Math.PI * 2); rctx.stroke();
+          // remaining time arc (round caps)
+          if (frac > 0.004) {
+            rctx.lineWidth = 4 * N;
+            rctx.strokeStyle = colHex;
+            rctx.beginPath();
+            rctx.arc(cx, cy, R - 3 * N, -Math.PI / 2, -Math.PI / 2 + frac * Math.PI * 2, false);
+            rctx.stroke();
+          }
+          const tex = S.textures.get('timerRing');
+          if (tex && tex.refresh) tex.refresh();
+          timerText.setColor(urgent ? '#ff6b6b' : '#ffffff');
+        }
+        drawRing(1, false);
+        timerText.setText(mmss(TIME_LIMIT));
+
+        // ── Timer ──
+        S.time.addEvent({
+          delay: 1000,
+          repeat: TIME_LIMIT - 1,
+          callback: () => {
+            if (gameOver) return;
+            timeLeft--;
+            timerText.setText(mmss(timeLeft));
+            const urgent = timeLeft <= 10;
+            drawRing(Math.max(0, timeLeft) / TIME_LIMIT, urgent);
+            if (urgent) {
+              ringC.setScale(1.15);
+              S.tweens.add({ targets: ringC, scaleX: 1, scaleY: 1, duration: 320, ease: 'Back.easeOut' });
+            }
+            if (timeLeft <= 0) endGame('lose');
+          }
+        });
+
+        // ── End Game ──
+        const endOverlay = S.add.rectangle(vw/2, vh/2, vw, vh, 0x000000, 0.85)
+          .setDepth(20).setVisible(false);
+        const endIcon = S.add.image(vw/2, vh/2, 'winIcon')
+          .setDepth(21).setVisible(false);
+
+        function endGame(result) {
+          if (gameOver) return;
+          gameOver = true;
+          canPick = false;
+          endOverlay.setVisible(true);
+
+          const key = result === 'win' ? 'winIcon' : 'loseIcon';
+          if (S.textures.exists(key)) {
+            endIcon.setTexture(key);
+            endIcon.setVisible(true);
+            const tex = S.textures.get(key).source[0];
+            const targetScale = Math.min(vw * 0.36, 360) / tex.width;
+            endIcon.setScale(targetScale);
+          }
+
+          S.tweens.add({
+            targets: endIcon,
+            scaleX: { from: endIcon.scaleX * 0.4, to: endIcon.scaleX },
+            scaleY: { from: endIcon.scaleY * 0.4, to: endIcon.scaleY },
+            alpha:  { from: 0, to: 1 },
+            duration: 350,
+            ease: 'Back.easeOut'
+          });
+        }
+
+        // ── Event log (QA) ──
+        const __evtLog = [];
+        const __evt = (t) => { __evtLog.push(t); if (__evtLog.length > 400) __evtLog.shift(); };
+
+        // ── Init ──
+        drawField();
+        if (COLLECT_MODE) checkCollects();
+
+        // ── Debug hook (read-only + scripted swap for QA; harmless in prod) ──
+        window.__matchDebug = {
+          events: () => __evtLog.slice(),
+          board: () => gameArray.map(r => r.map(c => c.gemColor)),
+          hasMatch: () => matchInBoard(),
+          canPick: () => canPick,
+          gameOver: () => gameOver,
+          collected: () => collectedCount,
+          cellXY: (r, c) => ({ x: boardX + c * gemSize + gemSize / 2, y: boardY + r * gemSize + gemSize / 2 }),
+          cellSize: () => gemSize,
+          swapping: () => swappingGems,
+          dump: () => {
+            const matches = [];
+            for (let r = 0; r < ROWS; r++)
+              for (let c = 0; c < COLS; c++)
+                if (isMatch(r, c)) matches.push([r, c]);
+            return {
+              board: gameArray.map(r => r.map(c => c.gemColor)),
+              empty: gameArray.map(r => r.map(c => c.isEmpty ? 1 : 0)),
+              special: gameArray.map(r => r.map(c => c.isSpecial ? 1 : 0)),
+              matches, canPick, gameOver, swapping: swappingGems,
+              selected: selectedGem ? [getGemRow(selectedGem), getGemCol(selectedGem)] : null,
+            };
+          },
+          swap: (r1, c1, r2, c2) => {
+            if (!canPick || gameOver) return false;
+            const g1 = gameArray[r1] && gameArray[r1][c1];
+            const g2 = gameArray[r2] && gameArray[r2][c2];
+            if (!g1 || !g2 || g1.gemColor < 0 || g2.gemColor < 0 || g1.isEmpty || g2.isEmpty) return false;
+            if (Math.abs(r1 - r2) + Math.abs(c1 - c2) !== 1) return false;
+            swapGems(g1, g2, true);
+            return true;
+          },
+        };
+      }
+    }
+
+    const config = {
+      type: Phaser.AUTO,
+      width: W,
+      height: H,
+      parent: 'game-container',
+      backgroundColor: '#1a1a2e',
+      // Render at native device pixel ratio (capped at 2x) so vector UI and text
+      // stay crisp on retina/high-DPI screens instead of being upscaled and blurry.
+      resolution: Math.min(window.devicePixelRatio || 1, 2),
+      antialias: true,
+      scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+      },
+      scene: [MatchScene],
+    };
+
+    new Phaser.Game(config);
+  };
+  document.head.appendChild(script);
+}
+</script>
+</body>
+</html>

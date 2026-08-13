@@ -96,7 +96,7 @@
       },
       "collectionShelf": "asset_36",
       "stoolLift": 66,
-      "stoolLandOffset": -30,
+      "stoolLandOffset": -10,
       "winCondition": {
         "type": "collect-all",
         "count": 3,

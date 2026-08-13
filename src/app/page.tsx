@@ -36,6 +36,9 @@ export default function Demo2Page() {
   const [games, setGames] = useState<Game[]>([]);
   const [mode, setMode] = useState<"reskin" | "scratch">("reskin");
 
+  // 内部引擎 id 保持 phaser-match，仅展示文案映射为 57creative-match
+  const displayEngine = (t: string) => (t === "phaser-match" ? "57creative-match" : t);
+
   // Mode 1 (reskin)
   const [reskinGame, setReskinGame] = useState<Game | null>(null);
   const [templateType, setTemplateType] = useState("phaser-match");
@@ -151,7 +154,7 @@ export default function Demo2Page() {
                   <span>Replay</span>
                 </button>
               )}
-              {result && <span>{result.spec.gameType} · {(result.html?.length || 0).toLocaleString()} chars</span>}
+              {result && <span>{displayEngine(result.spec.gameType)} · {(result.html?.length || 0).toLocaleString()} chars</span>}
             </div>
           </div>
           <div className="flex-1 relative">
@@ -186,7 +189,7 @@ export default function Demo2Page() {
               <p className="text-xs text-gray-500">
                 {mode === "scratch"
                   ? "Creative AI design powered by Claude"
-                  : "Fast theme swap powered by DeepSeek"}
+                  : "Fast theme swap powered by 57Creative"}
               </p>
             </div>
 
@@ -289,7 +292,7 @@ export default function Demo2Page() {
             {/* Result Info */}
             {result && (
               <div className="bg-gray-800 rounded-lg p-3 text-xs space-y-1.5">
-                <div><span className="text-gray-500">Engine</span> <span className="text-white ml-2">{result.spec.gameType}</span></div>
+                <div><span className="text-gray-500">Engine</span> <span className="text-white ml-2">{displayEngine(result.spec.gameType)}</span></div>
                 <div><span className="text-gray-500">Headline</span> <span className="text-white ml-2">{result.spec.copy.headline}</span></div>
                 <div><span className="text-gray-500">Theme</span> <span className="text-white ml-2">{result.spec.theme?.name}</span></div>
                 <div><span className="text-gray-500">Mood</span> <span className="text-white ml-2">{result.spec.theme?.colorMood}</span></div>
